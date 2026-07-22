@@ -15,7 +15,6 @@ public class CharacterMovement : MonoBehaviour
     public Vector3 VelocityDirection => _rb.linearVelocity.magnitude > 0.01f ? _rb.linearVelocity.normalized : transform.forward;
 
     public Vector3 ActualVelocity => _rb.linearVelocity;
-
     
     [SerializeField] GroundInfo _ground;
     [SerializeField] MoveInfo _move;
@@ -26,7 +25,6 @@ public class CharacterMovement : MonoBehaviour
     Rigidbody _rb;
     bool _isLocked;
     bool _wasGroundedLastFrame = true;
-
 
     public void Launch(float force)
     {
@@ -161,16 +159,18 @@ public class CharacterMovement : MonoBehaviour
         return vector - _ground.contactNormal * Vector3.Dot(vector, _ground.contactNormal);
     }
 
-    void AdjustVelocity () 
+    void AdjustVelocity ()
     {
+        if (IsGrounded == false)
+            return;
+        
         Vector3 xAxis = ProjectOnContactPlane(Vector3.right);
         Vector3 zAxis = ProjectOnContactPlane(Vector3.forward);
 
         float currentX = Vector3.Dot(_move.velocity, xAxis);
         float currentZ = Vector3.Dot(_move.velocity, zAxis);
 
-        float acceleration = IsGrounded ? _move.maxAcceleration : _move.maxAirAcceleration;
-        float maxSpeedChange = acceleration * Time.deltaTime;
+        float maxSpeedChange = _move.maxAcceleration * Time.deltaTime;
 
         Vector2 currentVel = new Vector2(currentX, currentZ);
         Vector2 desiredVel = new Vector2(_move.desiredVelocity.x, _move.desiredVelocity.z);
@@ -192,9 +192,8 @@ public class CharacterMovement : MonoBehaviour
         {
             _ground.stepsSinceLastGrounded = 0;
 
-            _move.tempMaxSpeed = Mathf.Max(_rb.linearVelocity.magnitude, _move.maxSpeed);
- 
-            if (_ground.groundContactCount > 1) {
+            if (_ground.groundContactCount > 1) 
+            {
                 _ground.contactNormal.Normalize();
             }
 
