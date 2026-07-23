@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,20 @@ public class BombManager : MonoBehaviour
             return bombMan;
         }
     }
+    
+    private InputSystem_Actions _input;
+    
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        _input = new InputSystem_Actions();
+        _input.Enable();
+    }
+
+    private void OnDestroy()
+    {
+        _input.Disable();
+    }
 
     private void Update()
     {
@@ -39,7 +54,28 @@ public class BombManager : MonoBehaviour
             _allBombs[0].TakeControlOf();
             _selectedBomb = _allBombs[0];
         }
+
+        if (_input.GameControl.Swap.WasPressedThisFrame())
+        {
+            HandleSwap();
+        }
     }
+
+    private void HandleSwap()
+    {
+        if (_allBombs.Count < 2)
+            return;
+        
+        _allBombs = _allBombs.OrderBy(b => b.RemainingTime).ToList();
+
+        int currentIndex = _allBombs.IndexOf(_selectedBomb);
+        int nextIndex = (currentIndex + 1) % _allBombs.Count;
+        _selectedBomb.ReleaseControlOf();
+
+        _selectedBomb = _allBombs[nextIndex];
+        _selectedBomb.TakeControlOf();
+    }
+    
     
     private void RegisterBomb(BombCharacter character)
     {
