@@ -23,10 +23,7 @@ public class BombCharacter : MonoBehaviour
 
     [SerializeField] 
     private GameObject _uiPrefab;
-    
-    [SerializeField] 
-    private GameObject _explosionPrefab;
-    
+
     private BombCharacterUI _uiInstance;
     
     void Start()
@@ -58,7 +55,7 @@ public class BombCharacter : MonoBehaviour
 
     public void Explode()
     {
-        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        GetComponent<ExplosionBase>()?.Explode(transform.position, transform.forward);
         Destroy(gameObject);
     }
 
@@ -104,5 +101,6 @@ public class BombCharacter : MonoBehaviour
         }
         
         BombManager.Unregister(this);
+        _input.Disable();
     }
 }

@@ -3,9 +3,38 @@ using UnityEngine;
 
 public class AllDirectionExplosion : ExplosionBase
 {
-    public float _powerfulRange = 2;
-    public float _weakRange = 2;
+    [Header("Range")]
+    [SerializeField] private float _powerfulRange = 2;
+    [SerializeField] private float _weakRange = 2;
     
+    [Header("Force")]
+    [SerializeField] private float _powerfulForce = 100;
+    [SerializeField] private float _weakForce = 50;
+
+    [Header("Lift")] 
+    [SerializeField, Range(0, 0.5f), Header("How much to Lerp upwards (percentage)")] 
+    private float _powerfulLift = 0.1f;
+    
+    [SerializeField, Range(0, 0.5f), Header("How much to Lerp upwards (percentage)")]  
+    private float _weakLift = 0.1f;
+
+    [SerializeField]
+    private GameObject _particlePrefab;
+    
+    public override void Explode(Vector3 position, Vector3 facing)
+    {
+        foreach (Collider col in Physics.OverlapSphere(position, _powerfulRange + _weakRange))
+        {
+            if (col.attachedRigidbody == null)
+                continue;
+            
+            col.attachedRigidbody.AddExplosionForce(_powerfulForce, position, _powerfulRange + _weakRange);
+        }
+        
+        GameObject newObj = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
+        Destroy(newObj, 8);
+    }
+
     public void OnDrawGizmos()
     {
         Vector3 littleUp = new Vector3(0, 0.1f, 0);

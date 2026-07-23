@@ -23,6 +23,11 @@ public class TimeManager : MonoBehaviour
         {
             TogglePause();
         }
+
+        if (_isPaused)
+            return;
+
+        Time.timeScale = _input.GameControl.FFWD.IsPressed() ? 4 : 1;
     }
 
     private void TogglePause()

@@ -1179,6 +1179,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FFWD"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f2ad50c-8674-413f-9e5a-cc486c60bfbd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1223,6 +1232,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72925990-9392-47d8-a5c2-823bcffe6697"",
+                    ""path"": ""<Keyboard>/period"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FFWD"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1323,6 +1343,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_GameControl_Menu = m_GameControl.FindAction("Menu", throwIfNotFound: true);
         m_GameControl_Retry = m_GameControl.FindAction("Retry", throwIfNotFound: true);
         m_GameControl_Swap = m_GameControl.FindAction("Swap", throwIfNotFound: true);
+        m_GameControl_FFWD = m_GameControl.FindAction("FFWD", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1810,6 +1831,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControl_Menu;
     private readonly InputAction m_GameControl_Retry;
     private readonly InputAction m_GameControl_Swap;
+    private readonly InputAction m_GameControl_FFWD;
     /// <summary>
     /// Provides access to input actions defined in input action map "GameControl".
     /// </summary>
@@ -1837,6 +1859,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GameControl/Swap".
         /// </summary>
         public InputAction @Swap => m_Wrapper.m_GameControl_Swap;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControl/FFWD".
+        /// </summary>
+        public InputAction @FFWD => m_Wrapper.m_GameControl_FFWD;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1875,6 +1901,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Swap.started += instance.OnSwap;
             @Swap.performed += instance.OnSwap;
             @Swap.canceled += instance.OnSwap;
+            @FFWD.started += instance.OnFFWD;
+            @FFWD.performed += instance.OnFFWD;
+            @FFWD.canceled += instance.OnFFWD;
         }
 
         /// <summary>
@@ -1898,6 +1927,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Swap.started -= instance.OnSwap;
             @Swap.performed -= instance.OnSwap;
             @Swap.canceled -= instance.OnSwap;
+            @FFWD.started -= instance.OnFFWD;
+            @FFWD.performed -= instance.OnFFWD;
+            @FFWD.canceled -= instance.OnFFWD;
         }
 
         /// <summary>
@@ -2194,5 +2226,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwap(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "FFWD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFFWD(InputAction.CallbackContext context);
     }
 }
