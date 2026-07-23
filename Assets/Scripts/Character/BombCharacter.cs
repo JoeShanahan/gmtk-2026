@@ -2,15 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WorldToCanvas;
 
 [RequireComponent(typeof(CharacterMovement))]
-public class Character : MonoBehaviour
+public class BombCharacter : MonoBehaviour
 {
     InputSystem_Actions _input;
     private Vector2 _moveInput;
     CharacterMovement _movement;
     Camera _mainCam;
 
+    public int RemainingTime => Mathf.Max(0, Mathf.CeilToInt(_remainingTime * 10));
+
+    [SerializeField, Tooltip("30 = 3 seconds")] 
+    private int _startTime;
+
+    [SerializeField]
+    private float _remainingTime;
+
+    [SerializeField] 
+    private GameObject _uiPrefab;
+
+    private BombCharacterUI _uiInstance;
+    
     void Start()
     {
         _movement = GetComponent<CharacterMovement>();
@@ -18,11 +32,20 @@ public class Character : MonoBehaviour
         _input = new();
         _input.Enable();
         _mainCam = Camera.main;
+
+        _remainingTime = _startTime / 10f;
+
+        _uiInstance = W2CManager.InstantiateAs<BombCharacterUI>(_uiPrefab);
+        _uiInstance.Init(this);
     }
 
     void Update()
     {
         HandlePlayerInput();
+        _remainingTime -= Time.deltaTime;
+        _remainingTime = Mathf.Max(_remainingTime, 0);
+        
+        _uiInstance.ProcessUpdate(this);
     }
     
     void HandlePlayerInput()
@@ -43,5 +66,13 @@ public class Character : MonoBehaviour
         Vector3 yComponent = playerInput.y * camForward;
 
         _movement.SetDesiredDirection(xComponent + yComponent);
+    }
+
+    private void OnDestroy()
+    {
+        if (_uiInstance != null)
+        {
+            Destroy(_uiInstance.gameObject);
+        }
     }
 }
