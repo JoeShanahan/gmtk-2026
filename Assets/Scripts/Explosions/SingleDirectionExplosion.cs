@@ -50,13 +50,12 @@ public class SingleDirectionExplosion : ExplosionBase
             if (diff.magnitude < _coneClip)
                 continue;
             
-            Vector3 bestLaunchVec = GetClosestDirection(diff);
             bool isLargeForce = diff.magnitude < _coneClip + _powerfulRange;
 
             float lerpAmount = isLargeForce ? _powerfulLift : _weakLift;
             float force = isLargeForce ? _powerfulForce : _weakForce;
 
-            bestLaunchVec = Vector3.Lerp(bestLaunchVec, Vector3.up, lerpAmount).normalized;
+            Vector3 bestLaunchVec = Vector3.Lerp(_snappedForward, Vector3.up, lerpAmount).normalized;
             col.attachedRigidbody.AddForce(bestLaunchVec * force, ForceMode.Impulse);
         }
         
