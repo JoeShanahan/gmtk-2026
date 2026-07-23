@@ -7,12 +7,12 @@ public class SingleDirectionExplosion : ExplosionBase
     [Header("Range")]
     [SerializeField] private float _powerfulRange = 2;
     [SerializeField] private float _weakRange = 2;
-    [SerializeField] private float _powerfulWidth = 3;
-    [SerializeField] private float _weakWidth = 5;
+    [SerializeField] private float _coneAngle = 45;
+    [SerializeField] private float _coneClip = 2;
     
     [Header("Force")]
-    [SerializeField] private float _powerfulForce = 100;
-    [SerializeField] private float _weakForce = 50;
+    [SerializeField] private float _powerfulForce = 20;
+    [SerializeField] private float _weakForce = 10;
 
     [Header("Lift")] 
     [SerializeField, Range(0, 0.5f), Header("How much to Lerp upwards (percentage)")] 
@@ -31,14 +31,42 @@ public class SingleDirectionExplosion : ExplosionBase
     
     public override void Explode(Vector3 position, Vector3 facing)
     {
+        Vector3 startPos = transform.position - (_snappedForward * _coneClip);
+        float totalRange = _coneClip + _powerfulRange + _weakRange;
 
+        foreach (Collider col in Physics.OverlapSphere(startPos, totalRange))
+        {
+            if (col.attachedRigidbody == null)
+                continue;
+
+            Vector3 diff = col.transform.position - startPos;
+            _snappedForward = GetClosestDirection(transform.forward);
+
+            float angle = Mathf.Abs(Vector3.Angle(diff.normalized, _snappedForward));
+            
+            if (angle > _coneAngle / 2)
+                continue;
+
+            if (diff.magnitude < _coneClip)
+                continue;
+            
+            Vector3 bestLaunchVec = GetClosestDirection(diff);
+            bool isLargeForce = diff.magnitude < _coneClip + _powerfulRange;
+
+            float lerpAmount = isLargeForce ? _powerfulLift : _weakLift;
+            float force = isLargeForce ? _powerfulForce : _weakForce;
+
+            bestLaunchVec = Vector3.Lerp(bestLaunchVec, Vector3.up, lerpAmount).normalized;
+            col.attachedRigidbody.AddForce(bestLaunchVec * force, ForceMode.Impulse);
+        }
+        
+        
         GameObject newObj = Instantiate(_particlePrefab, transform.position, Quaternion.LookRotation(facing, Vector3.up));
         Destroy(newObj, 8);
     }
 
     private Vector3 _cachedDirection;
     private Vector3 _snappedForward;
-    private Vector3 _snappedRight;
 
     public void OnDrawGizmos()
     {
@@ -46,49 +74,39 @@ public class SingleDirectionExplosion : ExplosionBase
         {
             _cachedDirection = transform.forward;
             _snappedForward = GetClosestDirection(_cachedDirection);
-            _snappedRight = GetClosestDirection(transform.right);
         }
         
-        Vector3 startPos = transform.position + new Vector3(0, -0.45f, 0);
+        Vector3 startPos = transform.position + new Vector3(0, -0.45f, 0) - (_snappedForward * _coneClip);
         Debug.DrawLine(transform.position, transform.position + _snappedForward, Color.green);
-
-        Vector3 pointA = startPos + (_snappedRight * _powerfulWidth * 0.5f);
-        Vector3 pointB = startPos + (_snappedRight * _powerfulWidth * -0.5f);
-        Vector3 pointC = pointA + (_snappedForward * _powerfulRange);
-        Vector3 pointD = pointB + (_snappedForward * _powerfulRange);
         
-        Debug.DrawLine(pointA, pointB, Color.red);
+        Vector3 positive = Quaternion.Euler(0f, _coneAngle * 0.5f, 0f) * _snappedForward;
+        Vector3 negative = Quaternion.Euler(0f, _coneAngle * -0.5f, 0f) * _snappedForward;
+
+        Vector3 pointA = startPos + (positive * _coneClip);
+        Vector3 pointB = startPos +  (negative * _coneClip);
+        Vector3 pointC = startPos + (positive * (_powerfulRange + _coneClip));
+        Vector3 pointD = startPos +  (negative * (_powerfulRange + _coneClip));
+        Vector3 pointE = startPos + _snappedForward * _coneClip;
+        Vector3 pointF = startPos + _snappedForward * (_powerfulRange + _coneClip);
+
+        Vector3 pointFarA = startPos + (positive * (_coneClip + _powerfulRange + _weakRange));
+        Vector3 pointFarB = startPos + (negative * (_coneClip + _powerfulRange + _weakRange));
+        Vector3 pointFarC = startPos + (_cachedDirection * (_coneClip + _powerfulRange + _weakRange));
+        
         Debug.DrawLine(pointA, pointC, Color.red);
         Debug.DrawLine(pointB, pointD, Color.red);
-        Debug.DrawLine(pointC, pointD, Color.red);
-
-        /*
-        for (int i = 0; i < 32; i++)
-        {
-            float circA = (Mathf.PI * 2 / 32) * i;
-            float circB = (Mathf.PI * 2 / 32) * (i + 1);
-
-            Vector3 pointA = new Vector3(Mathf.Cos(circA) * _powerfulRange, 0, Mathf.Sin(circA) * _powerfulRange);
-            Vector3 pointB = new Vector3(Mathf.Cos(circB) * _powerfulRange, 0, Mathf.Sin(circB) * _powerfulRange);
-
-            Vector3 pointA2 = new Vector3(Mathf.Cos(circA) * (_powerfulRange + _weakRange), 0, Mathf.Sin(circA) * (_powerfulRange + _weakRange));
-            Vector3 pointB2 = new Vector3(Mathf.Cos(circB) * (_powerfulRange + _weakRange), 0, Mathf.Sin(circB) * (_powerfulRange + _weakRange));
-
-            pointA += transform.position + littleUp;
-            pointB += transform.position + littleUp;
-
-            pointA2 += transform.position + littleUp;
-            pointB2 += transform.position + littleUp;
-
-            if (i % 4 == 2)
-            {
-                Debug.DrawLine(transform.position + littleUp, pointA, Color.red);
-                Debug.DrawLine(pointA, pointA2, Color.orange);
-            }
-
-            Debug.DrawLine(pointA, pointB, Color.red);
-            Debug.DrawLine(pointA2, pointB2, Color.orange);
-        }
-        */
+        
+        // Near red border
+        Debug.DrawLine(pointA, pointE, Color.red);
+        Debug.DrawLine(pointE, pointB, Color.red);
+        
+        // Far red border
+        Debug.DrawLine(pointC, pointF, Color.red);
+        Debug.DrawLine(pointF, pointD, Color.red);
+        
+        Debug.DrawLine(pointC, pointFarA, Color.orange);
+        Debug.DrawLine(pointD, pointFarB, Color.orange);
+        Debug.DrawLine(pointFarC, pointFarB, Color.orange);
+        Debug.DrawLine(pointFarC, pointFarA, Color.orange);
     }
 }

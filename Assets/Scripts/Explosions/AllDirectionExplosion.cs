@@ -9,8 +9,8 @@ public class AllDirectionExplosion : ExplosionBase
     [SerializeField] private float _weakRange = 2;
     
     [Header("Force")]
-    [SerializeField] private float _powerfulForce = 100;
-    [SerializeField] private float _weakForce = 50;
+    [SerializeField] private float _powerfulForce = 20;
+    [SerializeField] private float _weakForce = 10;
 
     [Header("Lift")] 
     [SerializeField, Range(0, 0.5f), Header("How much to Lerp upwards (percentage)")] 

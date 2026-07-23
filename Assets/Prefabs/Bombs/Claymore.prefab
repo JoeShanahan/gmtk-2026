@@ -297,10 +297,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SingleDirectionExplosion
   _powerfulRange: 2.5
   _weakRange: 2
-  _powerfulWidth: 3
-  _weakWidth: 4
-  _powerfulForce: 100
-  _weakForce: 50
+  _coneAngle: 45
+  _coneClip: 2
+  _powerfulForce: 25
+  _weakForce: 12
   _powerfulLift: 0.1
   _weakLift: 0.1
   _particlePrefab: {fileID: 2048184250282491274, guid: dd53b6ee7a2cb43f5891f3fef26bcbbf, type: 3}
