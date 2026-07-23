@@ -8,6 +8,8 @@ public class BombManager : MonoBehaviour
     [SerializeField] 
     private List<BombCharacter> _allBombs;
 
+    private BombCharacter _selectedBomb;
+    
     public static void Register(BombCharacter character) => Instance?.RegisterBomb(character);
     public static void Unregister(BombCharacter character) => Instance?.UnregisterBomb(character);
 
@@ -26,13 +28,17 @@ public class BombManager : MonoBehaviour
         }
     }
 
-    private IEnumerator Start()
+    private void Update()
     {
-        while (_allBombs.Count == 0)
-            yield return null;
+        if (_allBombs.Count == 0)
+            return;
 
-        _allBombs = _allBombs.OrderBy(b => b.RemainingTime).ToList();
-        _allBombs[0].TakeControlOf();
+        if (_selectedBomb == null)
+        {
+            _allBombs = _allBombs.OrderBy(b => b.RemainingTime).ToList();
+            _allBombs[0].TakeControlOf();
+            _selectedBomb = _allBombs[0];
+        }
     }
     
     private void RegisterBomb(BombCharacter character)
@@ -43,5 +49,10 @@ public class BombManager : MonoBehaviour
     private void UnregisterBomb(BombCharacter character)
     {
         _allBombs.Remove(character);
+
+        if (_selectedBomb == character)
+        {
+            _selectedBomb = null;
+        }
     }
 }
