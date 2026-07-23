@@ -1141,13 +1141,40 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""TimeControl"",
+            ""name"": ""GameControl"",
             ""id"": ""8adb48cf-6f17-4d10-8009-e48b35e49bb0"",
             ""actions"": [
                 {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""d326e282-a69a-4777-888c-d42040eccafc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Menu"",
+                    ""type"": ""Button"",
+                    ""id"": ""71d149bd-bceb-443b-8de1-59ae0310713e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Retry"",
+                    ""type"": ""Button"",
+                    ""id"": ""be5c7db0-70ac-4c31-a1be-431397562b75"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Swap"",
+                    ""type"": ""Button"",
+                    ""id"": ""92697ddd-82b5-4dab-9a0c-97ee3126c5d3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1163,6 +1190,39 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7be5dda7-4777-4556-8efb-7c86d375b81d"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f08ccae2-878d-4008-bc87-df6915c4aa10"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Retry"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8975c75-b5c1-4240-9a89-5bd8d2dbcf31"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swap"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1257,16 +1317,19 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
         m_UI_TrackedDevicePosition = m_UI.FindAction("TrackedDevicePosition", throwIfNotFound: true);
         m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
-        // TimeControl
-        m_TimeControl = asset.FindActionMap("TimeControl", throwIfNotFound: true);
-        m_TimeControl_Pause = m_TimeControl.FindAction("Pause", throwIfNotFound: true);
+        // GameControl
+        m_GameControl = asset.FindActionMap("GameControl", throwIfNotFound: true);
+        m_GameControl_Pause = m_GameControl.FindAction("Pause", throwIfNotFound: true);
+        m_GameControl_Menu = m_GameControl.FindAction("Menu", throwIfNotFound: true);
+        m_GameControl_Retry = m_GameControl.FindAction("Retry", throwIfNotFound: true);
+        m_GameControl_Swap = m_GameControl.FindAction("Swap", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_TimeControl.enabled, "This will cause a leak and performance issues, InputSystem_Actions.TimeControl.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_GameControl.enabled, "This will cause a leak and performance issues, InputSystem_Actions.GameControl.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1740,29 +1803,44 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// </summary>
     public UIActions @UI => new UIActions(this);
 
-    // TimeControl
-    private readonly InputActionMap m_TimeControl;
-    private List<ITimeControlActions> m_TimeControlActionsCallbackInterfaces = new List<ITimeControlActions>();
-    private readonly InputAction m_TimeControl_Pause;
+    // GameControl
+    private readonly InputActionMap m_GameControl;
+    private List<IGameControlActions> m_GameControlActionsCallbackInterfaces = new List<IGameControlActions>();
+    private readonly InputAction m_GameControl_Pause;
+    private readonly InputAction m_GameControl_Menu;
+    private readonly InputAction m_GameControl_Retry;
+    private readonly InputAction m_GameControl_Swap;
     /// <summary>
-    /// Provides access to input actions defined in input action map "TimeControl".
+    /// Provides access to input actions defined in input action map "GameControl".
     /// </summary>
-    public struct TimeControlActions
+    public struct GameControlActions
     {
         private @InputSystem_Actions m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public TimeControlActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        public GameControlActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "TimeControl/Pause".
+        /// Provides access to the underlying input action "GameControl/Pause".
         /// </summary>
-        public InputAction @Pause => m_Wrapper.m_TimeControl_Pause;
+        public InputAction @Pause => m_Wrapper.m_GameControl_Pause;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControl/Menu".
+        /// </summary>
+        public InputAction @Menu => m_Wrapper.m_GameControl_Menu;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControl/Retry".
+        /// </summary>
+        public InputAction @Retry => m_Wrapper.m_GameControl_Retry;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControl/Swap".
+        /// </summary>
+        public InputAction @Swap => m_Wrapper.m_GameControl_Swap;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_TimeControl; }
+        public InputActionMap Get() { return m_Wrapper.m_GameControl; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -1770,9 +1848,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="TimeControlActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="GameControlActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(TimeControlActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(GameControlActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -1780,14 +1858,23 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="TimeControlActions" />
-        public void AddCallbacks(ITimeControlActions instance)
+        /// <seealso cref="GameControlActions" />
+        public void AddCallbacks(IGameControlActions instance)
         {
-            if (instance == null || m_Wrapper.m_TimeControlActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_TimeControlActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_GameControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GameControlActionsCallbackInterfaces.Add(instance);
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Menu.started += instance.OnMenu;
+            @Menu.performed += instance.OnMenu;
+            @Menu.canceled += instance.OnMenu;
+            @Retry.started += instance.OnRetry;
+            @Retry.performed += instance.OnRetry;
+            @Retry.canceled += instance.OnRetry;
+            @Swap.started += instance.OnSwap;
+            @Swap.performed += instance.OnSwap;
+            @Swap.canceled += instance.OnSwap;
         }
 
         /// <summary>
@@ -1796,21 +1883,30 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="TimeControlActions" />
-        private void UnregisterCallbacks(ITimeControlActions instance)
+        /// <seealso cref="GameControlActions" />
+        private void UnregisterCallbacks(IGameControlActions instance)
         {
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Menu.started -= instance.OnMenu;
+            @Menu.performed -= instance.OnMenu;
+            @Menu.canceled -= instance.OnMenu;
+            @Retry.started -= instance.OnRetry;
+            @Retry.performed -= instance.OnRetry;
+            @Retry.canceled -= instance.OnRetry;
+            @Swap.started -= instance.OnSwap;
+            @Swap.performed -= instance.OnSwap;
+            @Swap.canceled -= instance.OnSwap;
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="TimeControlActions.UnregisterCallbacks(ITimeControlActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="GameControlActions.UnregisterCallbacks(IGameControlActions)" />.
         /// </summary>
-        /// <seealso cref="TimeControlActions.UnregisterCallbacks(ITimeControlActions)" />
-        public void RemoveCallbacks(ITimeControlActions instance)
+        /// <seealso cref="GameControlActions.UnregisterCallbacks(IGameControlActions)" />
+        public void RemoveCallbacks(IGameControlActions instance)
         {
-            if (m_Wrapper.m_TimeControlActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GameControlActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -1820,21 +1916,21 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="TimeControlActions.AddCallbacks(ITimeControlActions)" />
-        /// <seealso cref="TimeControlActions.RemoveCallbacks(ITimeControlActions)" />
-        /// <seealso cref="TimeControlActions.UnregisterCallbacks(ITimeControlActions)" />
-        public void SetCallbacks(ITimeControlActions instance)
+        /// <seealso cref="GameControlActions.AddCallbacks(IGameControlActions)" />
+        /// <seealso cref="GameControlActions.RemoveCallbacks(IGameControlActions)" />
+        /// <seealso cref="GameControlActions.UnregisterCallbacks(IGameControlActions)" />
+        public void SetCallbacks(IGameControlActions instance)
         {
-            foreach (var item in m_Wrapper.m_TimeControlActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GameControlActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_TimeControlActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GameControlActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="TimeControlActions" /> instance referencing this action map.
+    /// Provides a new <see cref="GameControlActions" /> instance referencing this action map.
     /// </summary>
-    public TimeControlActions @TimeControl => new TimeControlActions(this);
+    public GameControlActions @GameControl => new GameControlActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2064,11 +2160,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnTrackedDeviceOrientation(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "TimeControl" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "GameControl" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="TimeControlActions.AddCallbacks(ITimeControlActions)" />
-    /// <seealso cref="TimeControlActions.RemoveCallbacks(ITimeControlActions)" />
-    public interface ITimeControlActions
+    /// <seealso cref="GameControlActions.AddCallbacks(IGameControlActions)" />
+    /// <seealso cref="GameControlActions.RemoveCallbacks(IGameControlActions)" />
+    public interface IGameControlActions
     {
         /// <summary>
         /// Method invoked when associated input action "Pause" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
@@ -2077,5 +2173,26 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPause(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Menu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Retry" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRetry(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Swap" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwap(InputAction.CallbackContext context);
     }
 }

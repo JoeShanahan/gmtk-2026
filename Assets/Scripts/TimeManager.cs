@@ -19,7 +19,7 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_input.TimeControl.Pause.WasPressedThisFrame())
+        if (_input.GameControl.Pause.WasPressedThisFrame())
         {
             TogglePause();
         }

@@ -1055,13 +1055,40 @@
             ]
         },
         {
-            "name": "TimeControl",
+            "name": "GameControl",
             "id": "8adb48cf-6f17-4d10-8009-e48b35e49bb0",
             "actions": [
                 {
                     "name": "Pause",
                     "type": "Button",
                     "id": "d326e282-a69a-4777-888c-d42040eccafc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "71d149bd-bceb-443b-8de1-59ae0310713e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Retry",
+                    "type": "Button",
+                    "id": "be5c7db0-70ac-4c31-a1be-431397562b75",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Swap",
+                    "type": "Button",
+                    "id": "92697ddd-82b5-4dab-9a0c-97ee3126c5d3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -1077,6 +1104,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7be5dda7-4777-4556-8efb-7c86d375b81d",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f08ccae2-878d-4008-bc87-df6915c4aa10",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Retry",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8975c75-b5c1-4240-9a89-5bd8d2dbcf31",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Swap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
