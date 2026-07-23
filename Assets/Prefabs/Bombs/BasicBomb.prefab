@@ -206,9 +206,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AllDirectionExplosion
   _powerfulRange: 2
   _weakRange: 2
-  _powerfulForce: 1000
-  _weakForce: 500
-  _powerfulLift: 0.1
+  _powerfulForce: 20
+  _weakForce: 10
+  _powerfulLift: 0.4
   _weakLift: 0.1
   _particlePrefab: {fileID: 2048184250282491274, guid: 901a566295dc24ea499a3bef09e4abd1, type: 3}
 --- !u!1 &8745609741396014707
@@ -222,7 +222,6 @@ GameObject:
   - component: {fileID: 6593947835657889817}
   - component: {fileID: 5127119162407510095}
   - component: {fileID: 7272094889917665185}
-  - component: {fileID: 1179124271482010267}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -302,27 +301,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1179124271482010267
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8745609741396014707}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3077593152242129050
 PrefabInstance:
   m_ObjectHideFlags: 0
