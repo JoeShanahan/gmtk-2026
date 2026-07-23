@@ -104,7 +104,7 @@ public class CharacterMovement : MonoBehaviour
         _ground.wallContactCount = 0;
         _ground.wallNormal = Vector3.zero;
     }
-
+    
     void HandleFacingDirection()
     {
         if (_isLocked)
@@ -118,7 +118,7 @@ public class CharacterMovement : MonoBehaviour
 
             if (desiredDirection.magnitude > 0.1f)
             {
-                transform.rotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
+                _rb.rotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
             }
         }
         else if (_move.desiredVelocity.magnitude > 0.1f)
@@ -130,7 +130,7 @@ public class CharacterMovement : MonoBehaviour
             if (desiredDirection.magnitude > 0.1f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 19);
+                _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, 0.3f);
             }
         }
         

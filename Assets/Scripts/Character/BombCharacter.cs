@@ -13,7 +13,8 @@ public class BombCharacter : MonoBehaviour
     Camera _mainCam;
 
     public int RemainingTime => Mathf.Max(0, Mathf.CeilToInt(_remainingTime * 10));
-
+    public bool IsBeingControlled { get; private set; }
+    
     [SerializeField, Tooltip("30 = 3 seconds")] 
     private int _startTime;
 
@@ -30,13 +31,26 @@ public class BombCharacter : MonoBehaviour
         _movement = GetComponent<CharacterMovement>();
         
         _input = new();
-        _input.Enable();
         _mainCam = Camera.main;
 
         _remainingTime = _startTime / 10f;
 
         _uiInstance = W2CManager.InstantiateAs<BombCharacterUI>(_uiPrefab);
         _uiInstance.Init(this);
+        
+        BombManager.Register(this);
+    }
+
+    public void TakeControlOf()
+    {
+        _input.Enable();
+        IsBeingControlled = true;
+    }
+
+    public void ReleaseControlOf()
+    {
+        _input.Disable();
+        IsBeingControlled = false;
     }
 
     void Update()

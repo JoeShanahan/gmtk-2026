@@ -1053,6 +1053,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "TimeControl",
+            "id": "8adb48cf-6f17-4d10-8009-e48b35e49bb0",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "d326e282-a69a-4777-888c-d42040eccafc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1ffbe690-be04-4002-a8b0-c59219c31160",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
