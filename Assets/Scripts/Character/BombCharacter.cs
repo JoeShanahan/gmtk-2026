@@ -102,5 +102,7 @@ public class BombCharacter : MonoBehaviour
         {
             Destroy(_uiInstance.gameObject);
         }
+        
+        BombManager.Unregister(this);
     }
 }

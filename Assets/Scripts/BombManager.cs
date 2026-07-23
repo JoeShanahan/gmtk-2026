@@ -9,6 +9,7 @@ public class BombManager : MonoBehaviour
     private List<BombCharacter> _allBombs;
 
     public static void Register(BombCharacter character) => Instance?.RegisterBomb(character);
+    public static void Unregister(BombCharacter character) => Instance?.UnregisterBomb(character);
 
     private static BombManager Instance
     {
@@ -37,5 +38,10 @@ public class BombManager : MonoBehaviour
     private void RegisterBomb(BombCharacter character)
     {
         _allBombs.Add(character);
+    }
+    
+    private void UnregisterBomb(BombCharacter character)
+    {
+        _allBombs.Remove(character);
     }
 }

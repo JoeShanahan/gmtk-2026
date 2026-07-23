@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4394247282370592188}
   - component: {fileID: 2220034959689724278}
   m_Layer: 0
-  m_Name: BasicBomb
+  m_Name: Claymore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
