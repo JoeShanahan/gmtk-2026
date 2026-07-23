@@ -23,7 +23,10 @@ public class BombCharacter : MonoBehaviour
 
     [SerializeField] 
     private GameObject _uiPrefab;
-
+    
+    [SerializeField] 
+    private GameObject _explosionPrefab;
+    
     private BombCharacterUI _uiInstance;
     
     void Start()
@@ -53,6 +56,12 @@ public class BombCharacter : MonoBehaviour
         IsBeingControlled = false;
     }
 
+    public void Explode()
+    {
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
     void Update()
     {
         HandlePlayerInput();
@@ -60,6 +69,11 @@ public class BombCharacter : MonoBehaviour
         _remainingTime = Mathf.Max(_remainingTime, 0);
         
         _uiInstance.ProcessUpdate(this);
+
+        if (_remainingTime <= 0)
+        {
+            Explode();
+        }
     }
     
     void HandlePlayerInput()
