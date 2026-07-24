@@ -24,4 +24,4 @@ MonoBehaviour:
     Prefab: {fileID: 8472144850145563852, guid: 32e15c4d0fb0e4c9a99258b4cdade300, type: 3}
   - Desc: Big Boy
     Type: 3
-    Prefab: {fileID: 8472144850145563852, guid: 9992dd9d6720b44aba66e3c0ffa88f4e, type: 3}
+    Prefab: {fileID: 8472144850145563852, guid: 26f0727bc383e4029b525ae48e8b3c2c, type: 3}
