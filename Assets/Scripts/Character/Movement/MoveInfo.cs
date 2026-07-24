@@ -11,7 +11,6 @@ namespace MovementInfo
         [Range(0f, 100f)] public float maxAirAcceleration = 1f;
         [Range(0f, 100f)] public float maxSpeed = 10f;
 
-        public float tempMaxSpeed;
         [HideInInspector] public Vector3 velocity;
         [HideInInspector] public Vector3 desiredVelocity;
     }

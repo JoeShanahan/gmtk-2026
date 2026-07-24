@@ -4992,10 +4992,7 @@ MonoBehaviour:
   - {fileID: 934541241}
   - {fileID: 1258207860}
   - {fileID: 1089050867}
-  _basicPrefab: {fileID: 8472144850145563852, guid: 9992dd9d6720b44aba66e3c0ffa88f4e, type: 3}
-  _bigPrefab: {fileID: 8472144850145563852, guid: 65cb2d440bef64962942b7d3194cfcf2, type: 3}
-  _claymorePrefab: {fileID: 8472144850145563852, guid: b2af67f7bd3ca40168570bc72a142d44, type: 3}
-  _barrelPrefab: {fileID: 8472144850145563852, guid: 32e15c4d0fb0e4c9a99258b4cdade300, type: 3}
+  _lookup: {fileID: 11400000, guid: 59d5bb4271d0643d78424b7a491aa139, type: 2}
 --- !u!4 &1555825052
 Transform:
   m_ObjectHideFlags: 0
