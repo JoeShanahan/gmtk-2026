@@ -7,6 +7,7 @@ using System;
 public class CharacterMovement : MonoBehaviour
 {
     public event Action OnLanded;
+    public Vector3 Forward => _visualsRoot.forward;
 
     public bool IsGrounded => _ground.groundContactCount > 0;
 
@@ -87,7 +88,6 @@ public class CharacterMovement : MonoBehaviour
                 _visualsRoot.rotation = Quaternion.Lerp(_visualsRoot.rotation, targetRotation, Time.deltaTime * 16);
             }
         }
-        
     }
 
     void FixedUpdate()

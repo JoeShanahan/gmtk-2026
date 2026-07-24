@@ -40,7 +40,7 @@ public class SingleDirectionExplosion : ExplosionBase
                 continue;
 
             Vector3 diff = col.transform.position - startPos;
-            _snappedForward = GetClosestDirection(transform.forward);
+            _snappedForward = GetClosestDirection(_movement.Forward);
 
             float angle = Mathf.Abs(Vector3.Angle(diff.normalized, _snappedForward));
             
@@ -69,9 +69,9 @@ public class SingleDirectionExplosion : ExplosionBase
 
     public void OnDrawGizmos()
     {
-        if (transform.forward != _cachedDirection)
+        if (_movement.Forward != _cachedDirection)
         {
-            _cachedDirection = transform.forward;
+            _cachedDirection = _movement.Forward;
             _snappedForward = GetClosestDirection(_cachedDirection);
         }
         

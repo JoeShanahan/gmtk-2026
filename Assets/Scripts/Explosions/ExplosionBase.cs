@@ -3,6 +3,9 @@ using UnityEngine;
 
 public abstract class ExplosionBase : MonoBehaviour
 {
+    [SerializeField]
+    protected CharacterMovement _movement;
+    
     protected List<Vector3> _allSnapPoints;
 
     protected void GenerateAllSnapDirections()
@@ -30,8 +33,6 @@ public abstract class ExplosionBase : MonoBehaviour
     {
         
     }
-    
-    
 
     protected Vector3 GetClosestDirection(Vector3 originalDirection)
     {

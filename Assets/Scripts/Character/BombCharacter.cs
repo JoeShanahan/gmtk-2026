@@ -61,7 +61,7 @@ public class BombCharacter : MonoBehaviour
 
     public void Explode()
     {
-        GetComponent<ExplosionBase>()?.Explode(transform.position, transform.forward);
+        GetComponent<ExplosionBase>()?.Explode(transform.position, _movement.Forward);
         Destroy(gameObject);
     }
 
