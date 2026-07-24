@@ -40,5 +40,18 @@ public class LevelManager : MonoBehaviour
         {
             _debugUi?.SetActive(!_debugUi.gameObject.activeInHierarchy);
         }
+
+        if (_input.GameControl.Retry.WasPressedThisFrame())
+        {
+            RetryCurrentLevel();    
+        }
+    }
+
+    public void RetryCurrentLevel()
+    {
+        if (_selectedLevel == null)
+            return;
+        
+        InstantiateLevel(_selectedLevel);
     }
 }

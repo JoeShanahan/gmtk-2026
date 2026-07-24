@@ -61,7 +61,7 @@ public class BombManager : MonoBehaviour
         }
     }
 
-    private void HandleSwap()
+    public void HandleSwap()
     {
         if (_allBombs.Count < 2)
             return;
