@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AllDirectionExplosion : ExplosionBase
+// Locked to the 8 directions
+public class CardinalExplosion : ExplosionBase
 {
     [Header("Range")]
     [SerializeField] private float _powerfulRange = 2;
@@ -34,7 +35,7 @@ public class AllDirectionExplosion : ExplosionBase
 
             Vector3 diff = col.transform.position - position;
 
-            Vector3 bestLaunchVec = diff.normalized;
+            Vector3 bestLaunchVec = GetClosestDirection(diff);
 
             float lerpAmount = diff.magnitude > _powerfulRange ? _weakLift : _powerfulLift;
             float force = diff.magnitude > _powerfulRange ? _weakForce : _powerfulForce;
@@ -68,7 +69,12 @@ public class AllDirectionExplosion : ExplosionBase
             
             pointA2 += transform.position + littleUp;
             pointB2 += transform.position + littleUp;
-            
+
+            if (i % 4 == 2)
+            {
+                Debug.DrawLine(transform.position + littleUp, pointA, Color.red);
+                Debug.DrawLine(pointA, pointA2, Color.orange);
+            }
             
             Debug.DrawLine(pointA, pointB, Color.red);
             Debug.DrawLine(pointA2, pointB2, Color.orange);
