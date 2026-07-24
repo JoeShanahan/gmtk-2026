@@ -22,7 +22,7 @@ public class ControlsManager : MonoBehaviour
     {
         _input = new();
 
-        _input.Player.Enable();
+        _input.Enable();
         _input.GameControl.Pause.performed += InputSystemEvent;
         _input.GameControl.Menu.performed += InputSystemEvent;
         _input.GameControl.Retry.performed += InputSystemEvent;
@@ -30,10 +30,6 @@ public class ControlsManager : MonoBehaviour
         _input.GameControl.FFWD.performed += InputSystemEvent;
         _input.Player.Move.performed += JoystickEvent;
         _input.Player.Look.performed += JoystickEvent;
-
-        _input.UI.Enable();
-        // _input.UI.Navigate.performed += JoystickEvent; (this causes glitches)
-        _input.UI.Submit.performed += InputSystemEvent;
 
         OnControlTypeChanged(_currentController);
     }
