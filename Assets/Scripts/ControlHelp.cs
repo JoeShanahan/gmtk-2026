@@ -9,7 +9,7 @@ public class ControlHelp : MonoBehaviour
     [SerializeField] private Transform _swapButton;
     [SerializeField] private Transform _retryButton;
 
-    private Vector3 SMALL = new Vector3(0.85f, 0.85f, 0.85f);
+    private Vector3 SMALL = new Vector3(0.9f, 0.9f, 0.9f);
     private Vector3 NORMAL = Vector3.one;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
