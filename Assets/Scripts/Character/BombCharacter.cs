@@ -25,6 +25,12 @@ public class BombCharacter : MonoBehaviour
     private GameObject _uiPrefab;
 
     private BombCharacterUI _uiInstance;
+
+    public void Init(int life)
+    {
+        _startTime = life;
+        _remainingTime = life;
+    }
     
     void Start()
     {
