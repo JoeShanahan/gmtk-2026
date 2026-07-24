@@ -4,11 +4,11 @@ public class ControlHelp : MonoBehaviour
 {
     private InputSystem_Actions _input;
 
-    [SerializeField] private Transform _menuButton;
-    [SerializeField] private Transform _pauseButton;
-    [SerializeField] private Transform _swapButton;
-    [SerializeField] private Transform _retryButton;
-
+    [SerializeField] private UIButtonState _menuButton;
+    [SerializeField] private UIButtonState _pauseButton;
+    [SerializeField] private UIButtonState _swapButton;
+    [SerializeField] private UIButtonState _retryButton;
+    
     private Vector3 SMALL = new Vector3(0.9f, 0.9f, 0.9f);
     private Vector3 NORMAL = Vector3.one;
     
@@ -19,12 +19,33 @@ public class ControlHelp : MonoBehaviour
         _input.Enable();
     }
 
+    public void ButtonPressMenu()
+    {
+        
+    }
+
+    public void ButtonPressPause()
+    {
+        FindAnyObjectByType<TimeManager>().TogglePause();
+    }
+
+    public void ButtonPressSwap()
+    {
+        FindAnyObjectByType<BombManager>().HandleSwap();
+    }
+
+    public void ButtonPressRetry()
+    {
+        FindAnyObjectByType<LevelManager>().RetryCurrentLevel();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        _menuButton.localScale = _input.GameControl.Menu.IsPressed() ? SMALL : NORMAL;
-        _pauseButton.localScale = _input.GameControl.Pause.IsPressed() ? SMALL : NORMAL;
-        _swapButton.localScale = _input.GameControl.Swap.IsPressed() ? SMALL : NORMAL;
-        _retryButton.localScale = _input.GameControl.Retry.IsPressed() ? SMALL : NORMAL;
+        var control = _input.GameControl;
+        _menuButton.transform.localScale = control.Menu.IsPressed() || _menuButton.IsPressed ? SMALL : NORMAL;
+        _pauseButton.transform.localScale = control.Pause.IsPressed() || _pauseButton.IsPressed ? SMALL : NORMAL;
+        _swapButton.transform.localScale = control.Swap.IsPressed() || _swapButton.IsPressed ? SMALL : NORMAL;
+        _retryButton.transform.localScale = control.Retry.IsPressed() || _retryButton.IsPressed ? SMALL : NORMAL;
     }
 }

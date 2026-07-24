@@ -30,7 +30,7 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = _input.GameControl.FFWD.IsPressed() ? 4 : 1;
     }
 
-    private void TogglePause()
+    public void TogglePause()
     {
         _isPaused = !_isPaused;
         Time.timeScale = _isPaused ? 0.05f : 1;
