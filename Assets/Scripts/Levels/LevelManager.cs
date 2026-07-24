@@ -2,22 +2,22 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] 
-    private LevelData _levelToTest;
-
     private LevelData _selectedLevel;
     private SpawnedLevel _levelInstance;
     private float _currentSeconds;
+
+    [SerializeField] 
+    private DebugLevelSelectList _debugUi;
+
+    private InputSystem_Actions _input;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (_levelToTest != null)
-        {
-            InstantiateLevel(_levelToTest);
-        }
+        _input = new();
+        _input.Enable();
     }
-
+    
     public void InstantiateLevel(LevelData level)
     {
         if (_levelInstance != null)
@@ -28,11 +28,17 @@ public class LevelManager : MonoBehaviour
         _selectedLevel = level;
         _currentSeconds = 0;
         _levelInstance = Instantiate(level.Prefab).GetComponent<SpawnedLevel>();
+        _debugUi?.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         _currentSeconds += Time.deltaTime;
+
+        if (_input.GameControl.DebugLevelSelect.WasPressedThisFrame())
+        {
+            _debugUi?.SetActive(!_debugUi.gameObject.activeInHierarchy);
+        }
     }
 }

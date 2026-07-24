@@ -1188,6 +1188,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DebugLevelSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""876fa151-e76f-46fb-8320-ca441118283d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1243,6 +1252,17 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""FFWD"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afc2b81a-a62c-4be9-927f-20ee141451c4"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DebugLevelSelect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1344,6 +1364,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_GameControl_Retry = m_GameControl.FindAction("Retry", throwIfNotFound: true);
         m_GameControl_Swap = m_GameControl.FindAction("Swap", throwIfNotFound: true);
         m_GameControl_FFWD = m_GameControl.FindAction("FFWD", throwIfNotFound: true);
+        m_GameControl_DebugLevelSelect = m_GameControl.FindAction("DebugLevelSelect", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1832,6 +1853,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControl_Retry;
     private readonly InputAction m_GameControl_Swap;
     private readonly InputAction m_GameControl_FFWD;
+    private readonly InputAction m_GameControl_DebugLevelSelect;
     /// <summary>
     /// Provides access to input actions defined in input action map "GameControl".
     /// </summary>
@@ -1863,6 +1885,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GameControl/FFWD".
         /// </summary>
         public InputAction @FFWD => m_Wrapper.m_GameControl_FFWD;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControl/DebugLevelSelect".
+        /// </summary>
+        public InputAction @DebugLevelSelect => m_Wrapper.m_GameControl_DebugLevelSelect;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1904,6 +1930,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @FFWD.started += instance.OnFFWD;
             @FFWD.performed += instance.OnFFWD;
             @FFWD.canceled += instance.OnFFWD;
+            @DebugLevelSelect.started += instance.OnDebugLevelSelect;
+            @DebugLevelSelect.performed += instance.OnDebugLevelSelect;
+            @DebugLevelSelect.canceled += instance.OnDebugLevelSelect;
         }
 
         /// <summary>
@@ -1930,6 +1959,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @FFWD.started -= instance.OnFFWD;
             @FFWD.performed -= instance.OnFFWD;
             @FFWD.canceled -= instance.OnFFWD;
+            @DebugLevelSelect.started -= instance.OnDebugLevelSelect;
+            @DebugLevelSelect.performed -= instance.OnDebugLevelSelect;
+            @DebugLevelSelect.canceled -= instance.OnDebugLevelSelect;
         }
 
         /// <summary>
@@ -2233,5 +2265,12 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnFFWD(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DebugLevelSelect" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDebugLevelSelect(InputAction.CallbackContext context);
     }
 }

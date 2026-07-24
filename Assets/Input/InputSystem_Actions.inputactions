@@ -1102,6 +1102,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DebugLevelSelect",
+                    "type": "Button",
+                    "id": "876fa151-e76f-46fb-8320-ca441118283d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1157,6 +1166,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "FFWD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "afc2b81a-a62c-4be9-927f-20ee141451c4",
+                    "path": "<Keyboard>/l",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DebugLevelSelect",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
