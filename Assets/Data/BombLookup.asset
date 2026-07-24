@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a343e289559a41bbaac64fd957d2c1b, type: 3}
+  m_Name: BombLookup
+  m_EditorClassIdentifier: Assembly-CSharp::BombLookup
+  _allBombs:
+  - Desc: Basic
+    Type: 0
+    Prefab: {fileID: 8472144850145563852, guid: 9992dd9d6720b44aba66e3c0ffa88f4e, type: 3}
+  - Desc: Directional (claymore)
+    Type: 1
+    Prefab: {fileID: 8472144850145563852, guid: b2af67f7bd3ca40168570bc72a142d44, type: 3}
+  - Desc: Upwards (barrel)
+    Type: 2
+    Prefab: {fileID: 8472144850145563852, guid: 32e15c4d0fb0e4c9a99258b4cdade300, type: 3}
+  - Desc: Big Boy
+    Type: 3
+    Prefab: {fileID: 8472144850145563852, guid: 9992dd9d6720b44aba66e3c0ffa88f4e, type: 3}
