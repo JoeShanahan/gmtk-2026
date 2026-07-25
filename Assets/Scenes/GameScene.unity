@@ -5962,6 +5962,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PersistentUI
       objectReference: {fileID: 0}
+    - target: {fileID: 8482775866454290489, guid: 1d1abb496fcd844729e06be9fc65f6fe, type: 3}
+      propertyPath: _transitionTime
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

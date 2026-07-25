@@ -509,5 +509,5 @@ MonoBehaviour:
   _referenceRect: {fileID: 9122863958568340144}
   _blockerRect: {fileID: 6928757491774607999}
   _stableRect: {fileID: 6687813895906700358}
-  _transitionTime: 0.2
-  _pauseTime: 0.1
+  _transitionTime: 0.3
+  _pauseTime: 0.15

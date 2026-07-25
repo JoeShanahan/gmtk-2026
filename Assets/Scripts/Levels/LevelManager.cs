@@ -52,6 +52,6 @@ public class LevelManager : MonoBehaviour
         if (_selectedLevel == null)
             return;
         
-        InstantiateLevel(_selectedLevel);
+        PersistentUI.DoTransition(() => InstantiateLevel(_selectedLevel));
     }
 }
