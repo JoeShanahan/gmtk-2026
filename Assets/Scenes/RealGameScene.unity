@@ -679,7 +679,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 142453809}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1519965092}
+        m_TargetAssemblyTypeName: StartLevelScreen, Assembly-CSharp
+        m_MethodName: ButtonPressStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &142453809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,6 +761,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   _debugUi: {fileID: 0}
   _mainGameLevels: {fileID: 11400000, guid: 1aac80228539a4e179dca84a19ac1755, type: 2}
+  _mainGameUi: {fileID: 1909775633}
+  _startGameUi: {fileID: 1519965090}
 --- !u!4 &181668271
 Transform:
   m_ObjectHideFlags: 0
@@ -1250,7 +1264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.70090926, y: 0, z: 0, w: 0.71325046}
   m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5991,7 +6005,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63f58d027f5b643b496baed82dd7d2dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartLevelScreen
-  DebugToLoad: {fileID: 11400000, guid: 1ef81688b44ce499a945b7f92599f9e8, type: 2}
   _levelName: {fileID: 1977008773}
   _birdieTime: {fileID: 498030657}
   _parTime: {fileID: 512667549}
@@ -6970,7 +6983,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1666765384}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1519965092}
+        m_TargetAssemblyTypeName: StartLevelScreen, Assembly-CSharp
+        m_MethodName: ButtonPressMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1666765384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7543,13 +7568,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992668136}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.70090926, y: 0, z: 0, w: 0.71325046}
   m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89, y: 0, z: 0}
 --- !u!1 &1994925545
 GameObject:
   m_ObjectHideFlags: 0

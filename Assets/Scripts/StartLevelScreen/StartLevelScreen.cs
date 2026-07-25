@@ -15,4 +15,15 @@ public class StartLevelScreen : MonoBehaviour
         _parTime.Init(toLoad.SecondsPar, toLoad.MyBestTime);
         _myTime.SetMyTime(toLoad.MyBestTime);
     }
+
+    public void ButtonPressMenu()
+    {
+        PersistentUI.DoTransition("MainMenuScene");
+
+    }
+
+    public void ButtonPressStart()
+    {
+        FindAnyObjectByType<LevelManager>()?.BeginLevel();
+    }
 }
