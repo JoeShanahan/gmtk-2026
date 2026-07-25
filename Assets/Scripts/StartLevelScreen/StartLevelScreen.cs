@@ -3,18 +3,10 @@ using UnityEngine;
 
 public class StartLevelScreen : MonoBehaviour
 {
-    public LevelData DebugToLoad;
-
     [SerializeField] private TextMeshProUGUI _levelName;
     [SerializeField] private LevelTimeListItem _birdieTime;
     [SerializeField] private LevelTimeListItem _parTime;
     [SerializeField] private LevelTimeListItem _myTime;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        SetLevel(DebugToLoad);
-    }
 
     public void SetLevel(LevelData toLoad)
     {

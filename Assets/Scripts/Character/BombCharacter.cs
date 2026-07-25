@@ -65,7 +65,7 @@ public class BombCharacter : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void Update()
+    public void DoUpdate()
     {
         HandlePlayerInput();
         _remainingTime -= Time.deltaTime;

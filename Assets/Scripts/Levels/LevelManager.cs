@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
     
     private InputSystem_Actions _input;
     
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,6 +37,9 @@ public class LevelManager : MonoBehaviour
         _currentSeconds = 0;
         _levelInstance = Instantiate(level.Prefab).GetComponent<SpawnedLevel>();
         _debugUi?.SetActive(false);
+        
+        FindAnyObjectByType<StartLevelScreen>()?.SetLevel(level);
+        Time.timeScale = 0;
     }
 
     // Update is called once per frame
