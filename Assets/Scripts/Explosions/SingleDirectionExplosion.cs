@@ -28,7 +28,12 @@ public class SingleDirectionExplosion : ExplosionBase
     {
         GenerateAllSnapDirections();
     }
-    
+
+    public override Rigidbody[] GetObjectsInRange()
+    {
+        return new Rigidbody[] { };
+    }
+
     public override void Explode(Vector3 position, Vector3 facing)
     {
         Vector3 startPos = transform.position - (_snappedForward * _coneClip);

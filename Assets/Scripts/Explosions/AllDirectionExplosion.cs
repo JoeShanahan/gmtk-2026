@@ -22,7 +22,23 @@ public class AllDirectionExplosion : ExplosionBase
     [SerializeField]
     private GameObject _particlePrefab;
 
-    
+
+    public override Rigidbody[] GetObjectsInRange()
+    {
+        GenerateAllSnapDirections();
+
+        List<Rigidbody> dynamicRigidbodies = new List<Rigidbody>();
+        foreach (Collider col in Physics.OverlapSphere(transform.position, _powerfulRange + _weakRange))
+        {
+            if (col.attachedRigidbody == null || col.attachedRigidbody.isKinematic)
+                continue;
+            
+            dynamicRigidbodies.Add(col.attachedRigidbody);
+        }
+        
+        return dynamicRigidbodies.ToArray();
+    }
+
     public override void Explode(Vector3 position, Vector3 facing)
     {
         GenerateAllSnapDirections();

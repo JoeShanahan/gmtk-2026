@@ -17,6 +17,11 @@ public class VerticalExplosion : ExplosionBase
     [SerializeField]
     private GameObject _particlePrefab;
 
+    public override Rigidbody[] GetObjectsInRange()
+    {
+        return new Rigidbody[] { };
+    }
+
     public override void Explode(Vector3 position, Vector3 facing)
     {
         float totalRange = _downwardsRange + _powerfulRange + _weakRange;

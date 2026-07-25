@@ -7,6 +7,12 @@ public abstract class ExplosionBase : MonoBehaviour
     protected CharacterMovement _movement;
     
     protected List<Vector3> _allSnapPoints;
+    
+    /// <summary>
+    /// each Explosion Type has such a different implementation of what's in range that they should implement this themselves
+    /// </summary>
+    /// <returns></returns>
+    public abstract Rigidbody[] GetObjectsInRange();
 
     protected void GenerateAllSnapDirections()
     {
@@ -33,7 +39,7 @@ public abstract class ExplosionBase : MonoBehaviour
     {
         
     }
-
+    
     protected Vector3 GetClosestDirection(Vector3 originalDirection)
     {
         float bestDot = -1;

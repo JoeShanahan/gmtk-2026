@@ -1842,8 +1842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87834976250f4294495c19ace3e054d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplosionArrowManager
-  _indicatorPrefab: {fileID: 8497257055318855452, guid: 8925b8d85ef37fc4e98dc818c1baa927, type: 3}
-  _testFollower: {fileID: 1944032513}
+  _indicatorPrefab: {fileID: 5253509972648408072, guid: 9f6bb521cee1da8478a26b060ddb6ba1, type: 3}
 --- !u!4 &834678036
 Transform:
   m_ObjectHideFlags: 0
@@ -1856,8 +1855,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1944032514}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &848002981
@@ -4338,7 +4336,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 834678036}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1944032515
 Rigidbody:
@@ -5274,6 +5272,7 @@ SceneRoots:
   - {fileID: 2108338180}
   - {fileID: 181668271}
   - {fileID: 834678036}
+  - {fileID: 1944032514}
   - {fileID: 645073075}
   - {fileID: 1091593195}
   - {fileID: 1562131494}

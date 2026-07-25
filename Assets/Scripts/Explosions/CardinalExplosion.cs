@@ -22,8 +22,13 @@ public class CardinalExplosion : ExplosionBase
 
     [SerializeField]
     private GameObject _particlePrefab;
-
     
+    public override Rigidbody[] GetObjectsInRange()
+    {
+        Debug.Log("Not implemented");
+        return null;
+    }
+
     public override void Explode(Vector3 position, Vector3 facing)
     {
         GenerateAllSnapDirections();
