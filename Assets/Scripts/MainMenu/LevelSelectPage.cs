@@ -24,7 +24,14 @@ public class LevelSelectPage : MonoBehaviour
         {
             GameObject newObj = Instantiate(_templateCell, _gridRect);
             newObj.gameObject.SetActive(true);
-            newObj.GetComponent<LevelSelectCell>().Init(_levelSet.GetLevel(i));
+            newObj.GetComponent<LevelSelectCell>().Init(_levelSet.GetLevel(i), _levelSet);
         }
+    }
+
+    private const string MAIN_SCENE_NAME = "RealGameScene";
+    
+    public void GoToGame()
+    {
+        PersistentUI.DoTransition(MAIN_SCENE_NAME);
     }
 }

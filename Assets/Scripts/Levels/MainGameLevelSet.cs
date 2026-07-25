@@ -5,13 +5,17 @@ using UnityEngine;
 public class MainGameLevelSet : ScriptableObject
 {
     public IReadOnlyList<LevelData> Levels => _levels;
-
+    public LevelData SelectedLevel { get; private set; }
+    
     public int LevelCount => _levels.Count;
 
     [SerializeField] private SaveData _saveData;
-
+    
     public LevelData GetLevel(int levelIndex)
     {
+        if (levelIndex >= _levels.Count)
+            return null;
+        
         LevelData result = _levels[levelIndex];
         result.MainGameIndex = levelIndex;
         return result;
@@ -21,6 +25,11 @@ public class MainGameLevelSet : ScriptableObject
     {
         // TODO
         return 0;
+    }
+
+    public void SelectLevel(int levelIndex)
+    {
+        SelectedLevel = GetLevel(levelIndex);
     }
     
     [SerializeField] private List<LevelData> _levels;
