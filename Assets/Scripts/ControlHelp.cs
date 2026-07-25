@@ -31,7 +31,7 @@ public class ControlHelp : MonoBehaviour
 
     public void ButtonPressPause()
     {
-        FindAnyObjectByType<TimeManager>().TogglePause();
+        FindAnyObjectByType<PauseManager>().TogglePause();
     }
 
     public void ButtonPressSwap()

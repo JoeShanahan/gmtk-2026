@@ -3,45 +3,34 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] float timer;
-    private TMP_Text timerText;
-
-    public string formattedTimer;
+    TimeManager _timeManager;
     
-    [SerializeField] bool timerRunning;
+    [SerializeField] float timer;
+    private TMP_Text timerText; 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _timeManager = FindAnyObjectByType<TimeManager>();
         timerText = gameObject.GetComponentInChildren<TMP_Text>();
-        StartTimer();
+        _timeManager.StartTimer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timerRunning)
+        if (_timeManager.timerRunning)
         {
             timer += Time.deltaTime;
-            formattedTimer = timer.ToString("F2");
-            timerText.text = formattedTimer;
+            _timeManager.formattedTimer = timer.ToString("F2");
+            timerText.text = _timeManager.formattedTimer;
         }
-    }
-
-    public void StartTimer()
-    {
-        timerRunning = true;
-    }
-
-    public void StopTimer()
-    {
-        timerRunning = false;
     }
     
     public void ResetTimer()
     {
-        timerRunning = false;
+        _timeManager.timerRunning = false;
         timer = 0;
-        StartTimer();
+        _timeManager.StartTimer();
     }
 }
