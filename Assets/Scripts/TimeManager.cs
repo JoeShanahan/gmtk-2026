@@ -5,6 +5,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField] 
     private Transform _pauseBorder;
 
+    [SerializeField] 
+    private GameSettings _settings;
+    
     private InputSystem_Actions _input;
     private bool _isPaused;
     
@@ -15,7 +18,22 @@ public class TimeManager : MonoBehaviour
         _input.Enable();
         _pauseBorder.gameObject.SetActive(_isPaused);
     }
+    
+    private void OnDestroy()
+    {
+        _input.Disable();
+    }
 
+    public void OnSwapPerformed()
+    {
+        if (_settings != null && _settings.AutoPauseOnSwap)
+        {
+            _isPaused = true;
+            Time.timeScale = GetSlowSpeed();
+            _pauseBorder.gameObject.SetActive(true);
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -24,16 +42,25 @@ public class TimeManager : MonoBehaviour
             TogglePause();
         }
 
-        if (_isPaused)
-            return;
-
-        Time.timeScale = _input.GameControl.FFWD.IsPressed() ? 4 : 1;
+        // if (_isPaused)
+        //     return;
+        // Time.timeScale = _input.GameControl.FFWD.IsPressed() ? 4 : 1;
     }
 
-    private void TogglePause()
+    private float GetSlowSpeed()
+    {
+        return _settings == null ? SpeedSettings.DEFAULT : _settings.PauseSpeed;
+    }
+
+    public void OnPauseMenuClosed()
+    {
+        Time.timeScale = _isPaused ? GetSlowSpeed() : 1;
+    }
+
+    public void TogglePause()
     {
         _isPaused = !_isPaused;
-        Time.timeScale = _isPaused ? 0.05f : 1;
+        Time.timeScale = _isPaused ? GetSlowSpeed() : 1;
         _pauseBorder.gameObject.SetActive(_isPaused);
     }
 }

@@ -7,6 +7,7 @@ using System;
 public class CharacterMovement : MonoBehaviour
 {
     public event Action OnLanded;
+    public Vector3 Forward => _visualsRoot.forward;
 
     public bool IsGrounded => _ground.groundContactCount > 0;
 
@@ -20,69 +21,22 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] MoveInfo _move;
 
     [Space(8)]
-    [SerializeField] Collider _collider;
+    [SerializeField] private Collider _collider;
+    [SerializeField] private Transform _visualsRoot;
     
     Rigidbody _rb;
     bool _isLocked;
     bool _wasGroundedLastFrame = true;
-
-    public void Launch(float force)
-    {
-        _isLocked = true;
-        Vector3 direction = (Vector3.up + Vector3.up - transform.forward).normalized;
-
-        _rb.linearVelocity = direction * force;
-    }
-    
-    public void MoveForward(float amount)
-    {
-        Vector3 newPos = transform.position + (transform.forward * amount);
-        _rb.Move(newPos, transform.rotation);
-    }
-
-    public void Start()
-    {
-
-    }
-
-    public void SetLocked(bool isLocked)
-    {
-        _isLocked = isLocked;
-        _move.desiredVelocity = Vector3.zero;
-    }
-
-    public void ForceSetVelocity(Vector3 vel)
-    {
-        _rb.linearVelocity = vel;
-    }
-
-    public void ApplyForce(Vector3 force)
-    {
-        _rb.AddForce(force);
-    }
 
     public void SetDesiredDirection(Vector3 direction)
     {
         if (_isLocked)
             return;
 
-        _move.desiredVelocity = direction * _move.tempMaxSpeed;
+        _move.desiredVelocity = direction * _move.maxSpeed;
 
         direction.y = 0;
-    }
-
-    public void SetVelocity(Vector3 velocity, bool isDirection)
-    {
-        _move.desiredVelocity = velocity;
-        _rb.linearVelocity = velocity;
-
-        Vector3 direction = velocity.normalized;
-        direction.y = 0;
-    
-        if (isDirection && direction.magnitude > 0)
-        {
-            transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
-        }
+        HandleFacingDirection();
     }
 
     void OnValidate () 
@@ -118,7 +72,8 @@ public class CharacterMovement : MonoBehaviour
 
             if (desiredDirection.magnitude > 0.1f)
             {
-                _rb.rotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
+                Quaternion targetRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
+                _visualsRoot.rotation = Quaternion.Lerp(_visualsRoot.rotation, targetRotation, Time.deltaTime * 16);
             }
         }
         else if (_move.desiredVelocity.magnitude > 0.1f)
@@ -130,17 +85,15 @@ public class CharacterMovement : MonoBehaviour
             if (desiredDirection.magnitude > 0.1f)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
-                _rb.rotation = Quaternion.Lerp(_rb.rotation, targetRotation, 0.3f);
+                _visualsRoot.rotation = Quaternion.Lerp(_visualsRoot.rotation, targetRotation, Time.deltaTime * 16);
             }
         }
-        
     }
 
     void FixedUpdate()
     {
         UpdateState();
         AdjustVelocity();
-        HandleFacingDirection();
 
         if (_rb.isKinematic == false)
             _rb.linearVelocity = _move.velocity;

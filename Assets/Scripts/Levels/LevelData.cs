@@ -3,8 +3,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "LevelData", menuName = "Scriptable Objects/LevelData")]
 public class LevelData : ScriptableObject
 {
+    public string LevelName;
     public GameObject Prefab;
 
     public int SecondsBirdie;
     public int SecondsPar;
+    
+    // Populate these at runtime
+    public int MainGameIndex;
+    public float MyBestTime;
 }
