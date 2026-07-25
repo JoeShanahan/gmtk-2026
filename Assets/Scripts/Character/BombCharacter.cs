@@ -71,7 +71,7 @@ public class BombCharacter : MonoBehaviour
         _remainingTime -= Time.deltaTime;
         _remainingTime = Mathf.Max(_remainingTime, 0);
         
-        _uiInstance.ProcessUpdate(this);
+        _uiInstance?.ProcessUpdate(this);
 
         if (_remainingTime <= 0)
         {
