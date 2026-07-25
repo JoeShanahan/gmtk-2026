@@ -7,4 +7,8 @@ public class LevelData : ScriptableObject
 
     public int SecondsBirdie;
     public int SecondsPar;
+    
+    // Populate these at runtime
+    public int MainGameIndex;
+    public float MyBestTime;
 }

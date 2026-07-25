@@ -9,6 +9,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] 
     private DebugLevelSelectList _debugUi;
 
+    [SerializeField] 
+    private MainGameLevelSet _mainGameLevels;
+    
     private InputSystem_Actions _input;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -16,6 +19,10 @@ public class LevelManager : MonoBehaviour
     {
         _input = new();
         _input.Enable();
+        if (_mainGameLevels != null && _mainGameLevels.SelectedLevel != null)
+        {
+            InstantiateLevel(_mainGameLevels.SelectedLevel);
+        }
     }
     
     public void InstantiateLevel(LevelData level)
@@ -52,6 +59,6 @@ public class LevelManager : MonoBehaviour
         if (_selectedLevel == null)
             return;
         
-        InstantiateLevel(_selectedLevel);
+        PersistentUI.DoTransition(() => InstantiateLevel(_selectedLevel));
     }
 }
