@@ -2129,6 +2129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _allBombs: []
+  _isPaused: 0
 --- !u!4 &645073075
 Transform:
   m_ObjectHideFlags: 0
@@ -4050,6 +4051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _pauseBorder: {fileID: 335453412}
+  _settings: {fileID: 0}
 --- !u!4 &1091593195
 Transform:
   m_ObjectHideFlags: 0
@@ -6094,6 +6096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b79ccba46cc43f5a205c9dadf7ad6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSetup
+  _saveData: {fileID: 0}
 --- !u!4 &2108338180
 Transform:
   m_ObjectHideFlags: 0
