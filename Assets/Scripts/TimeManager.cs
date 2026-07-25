@@ -5,6 +5,9 @@ public class TimeManager : MonoBehaviour
     [SerializeField] 
     private Transform _pauseBorder;
 
+    [SerializeField] 
+    private GameSettings _settings;
+    
     private InputSystem_Actions _input;
     private bool _isPaused;
     
@@ -34,15 +37,20 @@ public class TimeManager : MonoBehaviour
         // Time.timeScale = _input.GameControl.FFWD.IsPressed() ? 4 : 1;
     }
 
+    private float GetSlowSpeed()
+    {
+        return _settings == null ? SpeedSettings.DEFAULT : _settings.PauseSpeed;
+    }
+
     public void OnPauseMenuClosed()
     {
-        Time.timeScale = _isPaused ? 0.05f : 1;
+        Time.timeScale = _isPaused ? GetSlowSpeed() : 1;
     }
 
     public void TogglePause()
     {
         _isPaused = !_isPaused;
-        Time.timeScale = _isPaused ? 0.05f : 1;
+        Time.timeScale = _isPaused ? GetSlowSpeed() : 1;
         _pauseBorder.gameObject.SetActive(_isPaused);
     }
 }

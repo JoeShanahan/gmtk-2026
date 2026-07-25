@@ -5168,6 +5168,15 @@ MonoBehaviour:
   _settings: {fileID: 11400000, guid: 87cc9335b01bb4898870ff0bd62600d8, type: 2}
   _timeMan: {fileID: 1091593194}
   _mainGameUI: {fileID: 1909775633}
+  _soundOnText: {fileID: 40682804}
+  _soundOffText: {fileID: 1919184482}
+  _musicOnText: {fileID: 1180091845}
+  _musicOffText: {fileID: 809531101}
+  _autoPauseOnText: {fileID: 84831703}
+  _autoPauseOffText: {fileID: 1037548449}
+  _pauseSpeedDefaultText: {fileID: 560144466}
+  _pauseSpeedSlowText: {fileID: 1411566006}
+  _pauseSpeedStoppedText: {fileID: 405890264}
 --- !u!4 &861946542
 Transform:
   m_ObjectHideFlags: 0
@@ -6754,6 +6763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _pauseBorder: {fileID: 335453412}
+  _settings: {fileID: 11400000, guid: 87cc9335b01bb4898870ff0bd62600d8, type: 2}
 --- !u!4 &1091593195
 Transform:
   m_ObjectHideFlags: 0
