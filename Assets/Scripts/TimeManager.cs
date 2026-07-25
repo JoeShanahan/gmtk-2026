@@ -14,16 +14,18 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    
-    public void StartTimer()
-    {
-        timerRunning = true;
+            
     }
 
-    public void StopTimer()
+    public void StartTime()
+    {
+        timerRunning = true;                    
+        Time.timeScale = 1;
+    }
+
+    public void StopTime()
     {
         timerRunning = false;
+        Time.timeScale = 0;
     }
 }

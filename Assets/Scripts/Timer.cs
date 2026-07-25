@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     {
         _timeManager = FindAnyObjectByType<TimeManager>();
         timerText = gameObject.GetComponentInChildren<TMP_Text>();
-        _timeManager.StartTimer();
+        _timeManager.StartTime();
     }
 
     // Update is called once per frame
@@ -31,6 +31,6 @@ public class Timer : MonoBehaviour
     {
         _timeManager.timerRunning = false;
         timer = 0;
-        _timeManager.StartTimer();
+        _timeManager.StartTime();
     }
 }
