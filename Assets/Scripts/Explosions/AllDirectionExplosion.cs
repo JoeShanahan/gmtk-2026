@@ -42,11 +42,13 @@ public class AllDirectionExplosion : ExplosionBase
 
             Vector3 bestLaunchVec = diff.normalized;
 
-            float lerpAmount = diff.magnitude > _powerfulRange ? _weakLift : _powerfulLift;
+            bool isWeakRange = diff.magnitude > _powerfulRange; 
+
+            float lerpAmount = isWeakRange ? _weakLift : _powerfulLift;
 
             bestLaunchVec = Vector3.Lerp(bestLaunchVec, Vector3.up, lerpAmount).normalized;
             
-            potentialExplosions.Add(new PotentialExplosionData(col.attachedRigidbody, this, bestLaunchVec));
+            potentialExplosions.Add(new PotentialExplosionData(col.attachedRigidbody, this, isWeakRange, bestLaunchVec));
         }
 
         return potentialExplosions.ToArray();

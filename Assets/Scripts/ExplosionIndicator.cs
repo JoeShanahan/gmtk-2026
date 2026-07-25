@@ -8,9 +8,26 @@ public class ExplosionIndicator : MonoBehaviour
 {
 	public Rigidbody RBToTrack { get; private set; }
 
+	[SerializeField] private GameObject _gfx;
+	[SerializeField] private Material _material;
+	
+	[Header("Weak Visuals")] 
+	[SerializeField] private Color _weakColour;
+	[SerializeField] private float _weakScaleMultiplier;
+	
+	[Header("Strong Visuals")] 
+	[SerializeField] private Color _strongColour;
+	[SerializeField] private float _strongScaleMultiplier;
+
+	private float _cachedStartingScale;
+	private Material _materialInstance;
+
 	public void Init(Rigidbody rbToTrack)
 	{
 		RBToTrack = rbToTrack;
+
+		_cachedStartingScale = _gfx.transform.localScale.x;
+		_materialInstance = _gfx.GetComponent<MeshRenderer>().material;
 	}
 	
 	public void UpdateIndicator(ExplosionBase.PotentialExplosionData data)
@@ -24,20 +41,30 @@ public class ExplosionIndicator : MonoBehaviour
 		var rotation = transform.rotation;
 		rotation.eulerAngles = GetEulerAnglesFromExplosionVector(data.ExplosionDirection);
 		transform.rotation = rotation;
+		
+		// set strength visual 
+		SetStrengthVisual(data.IsWeakRange);
 	}
 
 	private Vector3 GetEulerAnglesFromExplosionVector(Vector3 explosionDirectionOnTarget)
 	{
-		Debug.Log($"My explosion vector is {explosionDirectionOnTarget}");
-    
-		// Create a quaternion that points toward the explosion direction
 		Quaternion rotation = Quaternion.LookRotation(explosionDirectionOnTarget, Vector3.up);
-    
-		// Convert to euler angles
 		Vector3 eulerAngles = rotation.eulerAngles;
     
-		// Keep Z at 0, preserve X and Y
+		// keep z at 0
 		return new Vector3(eulerAngles.x, eulerAngles.y, 0);
 	}
-	
+
+	private void SetStrengthVisual(bool isWeakRange)
+	{
+		float scaleMultiplier = isWeakRange ? _weakScaleMultiplier : _strongScaleMultiplier;
+		_gfx.transform.localScale = Vector3.one * (scaleMultiplier * _cachedStartingScale);
+
+		_materialInstance.color = isWeakRange ? _weakColour : _strongColour;
+	}
+
+	private void OnDestroy()
+	{
+		Destroy(_materialInstance);
+	}
 }

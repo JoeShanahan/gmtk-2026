@@ -7,12 +7,14 @@ public abstract class ExplosionBase : MonoBehaviour
     {
         public Rigidbody Target { get; set; }
         public ExplosionBase Bomb { get; set; }
+        public bool IsWeakRange { get; private set; }
         public Vector3 ExplosionDirection { get; set; }
 
-        public PotentialExplosionData(Rigidbody target, ExplosionBase bomb, Vector3 direction)
+        public PotentialExplosionData(Rigidbody target, ExplosionBase bomb, bool isWeakRange, Vector3 direction)
         {
             Target = target;
             Bomb = bomb;
+            IsWeakRange = isWeakRange;
             ExplosionDirection = direction;
         }
     }
