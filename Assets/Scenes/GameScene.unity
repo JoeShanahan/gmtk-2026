@@ -6187,6 +6187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b79ccba46cc43f5a205c9dadf7ad6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSetup
+  _saveData: {fileID: 11400000, guid: d60bce4b7236d40408a04ce1f3823160, type: 2}
 --- !u!4 &2108338180
 Transform:
   m_ObjectHideFlags: 0
