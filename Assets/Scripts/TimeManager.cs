@@ -24,6 +24,16 @@ public class TimeManager : MonoBehaviour
         _input.Disable();
     }
 
+    public void OnSwapPerformed()
+    {
+        if (_settings != null && _settings.AutoPauseOnSwap)
+        {
+            _isPaused = true;
+            Time.timeScale = GetSlowSpeed();
+            _pauseBorder.gameObject.SetActive(true);
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
