@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public class Checkpoints : MonoBehaviour
+public class Goal : MonoBehaviour
 {
+    // Just incase something is wanted from the garlic
     private GarlicManager _garlicManager;
     
     private void Start()
@@ -14,8 +15,13 @@ public class Checkpoints : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Garlic")) return;
-        Debug.Log("Updating checkpoint");
-        _garlicManager.UpdateCurrentSpawner(this.gameObject);
-        gameObject.GetComponent<Collider>().isTrigger = false;
+        Win();
+    }
+
+    private void Win()
+    {
+        Time.timeScale = 0;
+        Debug.Log("Won!");
+        // Do other win things here
     }
 }
