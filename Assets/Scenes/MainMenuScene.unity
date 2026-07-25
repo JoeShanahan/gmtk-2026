@@ -3604,6 +3604,7 @@ GameObject:
   - component: {fileID: 2137360832}
   - component: {fileID: 2137360831}
   - component: {fileID: 2137360830}
+  - component: {fileID: 2137360833}
   m_Layer: 5
   m_Name: LevelSelect
   m_TagString: Untagged
@@ -3696,6 +3697,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137360828}
   m_CullTransparentMesh: 1
+--- !u!114 &2137360833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137360828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b14825e7a4a443f94bdc18df0c0ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelSelectPage
+  _templateCell: {fileID: 679088195}
+  _gridRect: {fileID: 1482587602}
+  _levelSet: {fileID: 11400000, guid: 1aac80228539a4e179dca84a19ac1755, type: 2}
 --- !u!1 &2139000061
 GameObject:
   m_ObjectHideFlags: 0
