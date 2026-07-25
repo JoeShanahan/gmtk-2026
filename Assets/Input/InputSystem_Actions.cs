@@ -898,6 +898,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""SwapBack"",
+                    ""type"": ""Button"",
+                    ""id"": ""f6964a0b-b8a3-4ec1-9f7b-b24545c2cd50"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""FFWD"",
                     ""type"": ""Button"",
                     ""id"": ""3f2ad50c-8674-413f-9e5a-cc486c60bfbd"",
@@ -1040,8 +1049,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b794c340-a175-4afe-b9b4-721043c43a3f"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""id"": ""8b4f3cee-0199-4acb-8ef4-14bdc172e950"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1051,12 +1060,34 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8b4f3cee-0199-4acb-8ef4-14bdc172e950"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""id"": ""cc179c3c-08a3-4626-8c3b-ab256a863c73"",
+                    ""path"": ""<Keyboard>/period"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82093cd7-4067-4cdc-82f3-86741fb056a4"",
+                    ""path"": ""<Keyboard>/comma"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapBack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c7dea198-acae-42e1-a475-739b333b99c3"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwapBack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1172,6 +1203,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_GameControl_Menu = m_GameControl.FindAction("Menu", throwIfNotFound: true);
         m_GameControl_Retry = m_GameControl.FindAction("Retry", throwIfNotFound: true);
         m_GameControl_Swap = m_GameControl.FindAction("Swap", throwIfNotFound: true);
+        m_GameControl_SwapBack = m_GameControl.FindAction("SwapBack", throwIfNotFound: true);
         m_GameControl_FFWD = m_GameControl.FindAction("FFWD", throwIfNotFound: true);
         m_GameControl_DebugLevelSelect = m_GameControl.FindAction("DebugLevelSelect", throwIfNotFound: true);
     }
@@ -1584,6 +1616,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_GameControl_Menu;
     private readonly InputAction m_GameControl_Retry;
     private readonly InputAction m_GameControl_Swap;
+    private readonly InputAction m_GameControl_SwapBack;
     private readonly InputAction m_GameControl_FFWD;
     private readonly InputAction m_GameControl_DebugLevelSelect;
     /// <summary>
@@ -1613,6 +1646,10 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "GameControl/Swap".
         /// </summary>
         public InputAction @Swap => m_Wrapper.m_GameControl_Swap;
+        /// <summary>
+        /// Provides access to the underlying input action "GameControl/SwapBack".
+        /// </summary>
+        public InputAction @SwapBack => m_Wrapper.m_GameControl_SwapBack;
         /// <summary>
         /// Provides access to the underlying input action "GameControl/FFWD".
         /// </summary>
@@ -1659,6 +1696,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Swap.started += instance.OnSwap;
             @Swap.performed += instance.OnSwap;
             @Swap.canceled += instance.OnSwap;
+            @SwapBack.started += instance.OnSwapBack;
+            @SwapBack.performed += instance.OnSwapBack;
+            @SwapBack.canceled += instance.OnSwapBack;
             @FFWD.started += instance.OnFFWD;
             @FFWD.performed += instance.OnFFWD;
             @FFWD.canceled += instance.OnFFWD;
@@ -1688,6 +1728,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Swap.started -= instance.OnSwap;
             @Swap.performed -= instance.OnSwap;
             @Swap.canceled -= instance.OnSwap;
+            @SwapBack.started -= instance.OnSwapBack;
+            @SwapBack.performed -= instance.OnSwapBack;
+            @SwapBack.canceled -= instance.OnSwapBack;
             @FFWD.started -= instance.OnFFWD;
             @FFWD.performed -= instance.OnFFWD;
             @FFWD.canceled -= instance.OnFFWD;
@@ -1941,6 +1984,13 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwap(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwapBack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwapBack(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "FFWD" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

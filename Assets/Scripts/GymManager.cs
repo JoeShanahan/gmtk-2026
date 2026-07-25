@@ -69,6 +69,11 @@ public class GymManager : MonoBehaviour
         _input = new InputSystem_Actions();
         _input.Enable();
     }
+    
+    private void OnDestroy()
+    {
+        _input.Disable();
+    }
 
     void Update()
     {
