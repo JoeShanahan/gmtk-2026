@@ -19,8 +19,36 @@ public class VerticalExplosion : ExplosionBase
 
     public override PotentialExplosionData[] GetPotentialExplosions()
     {
-        Debug.Log("Not implemented");
-        return null;
+        List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
+        
+        float totalRange = _downwardsRange + _powerfulRange + _weakRange;
+        Vector3 bottom = transform.position - new Vector3(0, _downwardsRange, 0);
+        Vector3 top = transform.position + (Vector3.up * (_powerfulRange + _weakRange));
+        Vector3 mid = Vector3.Lerp(top, bottom, 0.5f);
+
+        Vector2 my2Dpos = new Vector2(transform.position.x, transform.position.z);
+        
+        foreach (Collider col in Physics.OverlapSphere(mid, totalRange / 2))
+        {
+            if (col.attachedRigidbody == null)
+                continue;
+            
+            if (col.attachedRigidbody == _myRB)
+                continue;
+
+            Vector2 their2Dpos = new Vector2(col.transform.position.x, col.transform.position.z);
+
+            if (Vector2.Distance(my2Dpos, their2Dpos) > _radius)
+                continue;
+
+            float verticalDistance = col.transform.position.y - transform.position.y;
+
+            bool isLargeForce = verticalDistance < _powerfulRange;
+            
+            potentialExplosions.Add(new PotentialExplosionData(col.attachedRigidbody, this, !isLargeForce, Vector2.up));
+        }
+
+        return potentialExplosions.ToArray();
     }
 
     public override void Explode(Vector3 position, Vector3 facing)

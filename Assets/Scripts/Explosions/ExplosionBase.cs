@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class ExplosionBase : MonoBehaviour
@@ -23,7 +24,14 @@ public abstract class ExplosionBase : MonoBehaviour
     protected CharacterMovement _movement;
     
     protected List<Vector3> _allSnapPoints;
-    
+
+    protected Rigidbody _myRB;
+
+    private void OnEnable()
+    {
+        _myRB = GetComponent<Rigidbody>();
+    }
+
     /// <summary>
     /// each Explosion Type has such a different implementation of what's in range that they should implement this themselves
     /// </summary>

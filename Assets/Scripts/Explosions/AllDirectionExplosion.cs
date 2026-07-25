@@ -21,13 +21,12 @@ public class AllDirectionExplosion : ExplosionBase
 
     [SerializeField]
     private GameObject _particlePrefab;
-
+    
 
     public override PotentialExplosionData[] GetPotentialExplosions()
     {
         GenerateAllSnapDirections();
-        Rigidbody myRB = GetComponent<Rigidbody>();
-
+        
         List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
         
         foreach (Collider col in Physics.OverlapSphere(transform.position, _powerfulRange + _weakRange))
@@ -35,7 +34,7 @@ public class AllDirectionExplosion : ExplosionBase
             if (col.attachedRigidbody == null)
                 continue;
 
-            if (col.attachedRigidbody == myRB)
+            if (col.attachedRigidbody == _myRB)
                 continue;
 
             Vector3 diff = col.transform.position - transform.position;
