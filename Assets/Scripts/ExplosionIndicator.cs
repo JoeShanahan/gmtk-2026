@@ -6,40 +6,38 @@ using UnityEngine;
 /// </summary>
 public class ExplosionIndicator : MonoBehaviour
 {
-	[SerializeField] private GameObject _arrowGFX;
-	
 	public Rigidbody RBToTrack { get; private set; }
-	public ExplosionBase ClosestExplosive { get; private set; }
 
-	public void Init(Rigidbody rbToTrack, ExplosionBase explosive)
+	public void Init(Rigidbody rbToTrack)
 	{
 		RBToTrack = rbToTrack;
-		ClosestExplosive = explosive;
 	}
-
-	public void SetClosestExplosive(ExplosionBase newBase)
+	
+	public void UpdateIndicator(ExplosionBase.PotentialExplosionData data)
 	{
-		ClosestExplosive = newBase;
-	}
-
-	private void LateUpdate()
-	{
-		if (RBToTrack == null) return;
+		if(data.Target != RBToTrack){ Debug.Log("Indicator trying to represent wrong object");}
 		
 		// set position
-		transform.position = RBToTrack.transform.position;
+		transform.position = data.Target.transform.position;
 		
 		// set rotation 
-		var rotation = _arrowGFX.transform.rotation;
-		rotation.eulerAngles = new Vector3(90, GetYRotationAngle(), 0);
-		_arrowGFX.transform.rotation = rotation;
+		var rotation = transform.rotation;
+		rotation.eulerAngles = GetEulerAnglesFromExplosionVector(data.ExplosionDirection);
+		transform.rotation = rotation;
 	}
 
-	private float GetYRotationAngle()
+	private Vector3 GetEulerAnglesFromExplosionVector(Vector3 explosionDirectionOnTarget)
 	{
-		// need to use target and bomb (both are known) to get explosion direction of target 
-		// then convert this into a Y axis angle for the indicator
-		return 0;
+		Debug.Log($"My explosion vector is {explosionDirectionOnTarget}");
+    
+		// Create a quaternion that points toward the explosion direction
+		Quaternion rotation = Quaternion.LookRotation(explosionDirectionOnTarget, Vector3.up);
+    
+		// Convert to euler angles
+		Vector3 eulerAngles = rotation.eulerAngles;
+    
+		// Keep Z at 0, preserve X and Y
+		return new Vector3(eulerAngles.x, eulerAngles.y, 0);
 	}
 	
 }

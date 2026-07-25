@@ -9,7 +9,7 @@ public class ExplosionIndicatorManager : MonoBehaviour
 	private void Update()
 	{
 		List<Rigidbody> allRigidbodiesInRange = new List<Rigidbody>();
-		List<ExplosionBase> allExplosionBases = new List<ExplosionBase>();
+		List<ExplosionBase.PotentialExplosionData> allPotentialExplosions = new List<ExplosionBase.PotentialExplosionData>();
 		
 		for (int i = 0; i < BombManager.Instance.AllBombs.Count; i++)
 		{
@@ -19,18 +19,17 @@ public class ExplosionIndicatorManager : MonoBehaviour
 				Debug.LogWarning($"Something probably went wrong, couldn't find explosion base on {BombManager.Instance.AllBombs[i]}");
 			}
 			
-			allExplosionBases.Add(explosionBase);
-			
-			// get bodies in range
-			Rigidbody[] bodiesInRange = explosionBase.GetObjectsInRange();
-			
-			// keep track of all bodies so we can clean orphaned ones
-			for (int j = 0; j < bodiesInRange.Length; j++)
+			ExplosionBase.PotentialExplosionData[] potentialExplosions = explosionBase.GetPotentialExplosions();
+
+			for (int j = 0; j < potentialExplosions.Length; j++)
 			{
-				if(!allRigidbodiesInRange.Contains(bodiesInRange[j])) allRigidbodiesInRange.Add(bodiesInRange[j]);
+				allPotentialExplosions.Add(potentialExplosions[j]);
+				
+				if(!allRigidbodiesInRange.Contains(potentialExplosions[j].Target)) allRigidbodiesInRange.Add(potentialExplosions[j].Target);
 			}
 		}
 
+		// go through all RBs affected 
 		for (int i = 0; i < allRigidbodiesInRange.Count; i++)
 		{
 			ExplosionIndicator indicatorOfRB = null;
@@ -49,13 +48,13 @@ public class ExplosionIndicatorManager : MonoBehaviour
 			{
 				ExplosionIndicator newIndicator = Instantiate(_indicatorPrefab, transform);
 				_activeExplosionIndicators.Add(newIndicator);
-				newIndicator.Init(allRigidbodiesInRange[i], GetClosestExplosionBase(allRigidbodiesInRange[i], allExplosionBases));
+				newIndicator.Init(allRigidbodiesInRange[i]);
 
-				break;
+				indicatorOfRB = newIndicator;
 			}
 			
-			// check that the indicator assigned is using the closest explosive base
-			indicatorOfRB.SetClosestExplosive(GetClosestExplosionBase(allRigidbodiesInRange[i], allExplosionBases));
+			// Update the indicator's data display
+			indicatorOfRB.UpdateIndicator(GetClosestPotentialExplosion(allRigidbodiesInRange[i], allPotentialExplosions));
 		}
 
 		// remove orphaned indicators
@@ -69,23 +68,27 @@ public class ExplosionIndicatorManager : MonoBehaviour
 		}
 	}
 
-	private ExplosionBase GetClosestExplosionBase(Rigidbody rb, List<ExplosionBase> explosionBases)
+	private ExplosionBase.PotentialExplosionData GetClosestPotentialExplosion(Rigidbody targetRB, List<ExplosionBase.PotentialExplosionData> potentialExplosions)
 	{
-		ExplosionBase closestBomb = null;
+		ExplosionBase.PotentialExplosionData closestExplosion = new ExplosionBase.PotentialExplosionData();
+		
 		float closestDistance = float.MaxValue;
-		Vector3 targetPosition = rb.transform.position;
+		Vector3 targetPosition = targetRB.transform.position;
 
-		foreach (ExplosionBase bomb in explosionBases)
+		foreach (ExplosionBase.PotentialExplosionData potentialExplosion in potentialExplosions)
 		{
-			float distance = Vector3.Distance(bomb.transform.position, targetPosition);
+			if(potentialExplosion.Target != targetRB) continue;
+			
+			// get the closest bomb to RB 
+			float distance = Vector3.Distance(potentialExplosion.Bomb.transform.position, targetPosition);
         
 			if (distance < closestDistance)
 			{
 				closestDistance = distance;
-				closestBomb = bomb;
+				closestExplosion = potentialExplosion;
 			}
 		}
 
-		return closestBomb;
+		return closestExplosion;
 	}
 }

@@ -3,6 +3,20 @@ using UnityEngine;
 
 public abstract class ExplosionBase : MonoBehaviour
 {
+    public struct PotentialExplosionData
+    {
+        public Rigidbody Target { get; set; }
+        public ExplosionBase Bomb { get; set; }
+        public Vector3 ExplosionDirection { get; set; }
+
+        public PotentialExplosionData(Rigidbody target, ExplosionBase bomb, Vector3 direction)
+        {
+            Target = target;
+            Bomb = bomb;
+            ExplosionDirection = direction;
+        }
+    }
+    
     [SerializeField]
     protected CharacterMovement _movement;
     
@@ -12,7 +26,7 @@ public abstract class ExplosionBase : MonoBehaviour
     /// each Explosion Type has such a different implementation of what's in range that they should implement this themselves
     /// </summary>
     /// <returns></returns>
-    public abstract Rigidbody[] GetObjectsInRange();
+    public abstract PotentialExplosionData[] GetPotentialExplosions();
 
     protected void GenerateAllSnapDirections()
     {

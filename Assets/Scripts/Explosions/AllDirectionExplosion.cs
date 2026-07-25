@@ -23,26 +23,35 @@ public class AllDirectionExplosion : ExplosionBase
     private GameObject _particlePrefab;
 
 
-    public override Rigidbody[] GetObjectsInRange()
+    public override PotentialExplosionData[] GetPotentialExplosions()
     {
         GenerateAllSnapDirections();
         Rigidbody myRB = GetComponent<Rigidbody>();
 
-        List<Rigidbody> dynamicRigidbodies = new List<Rigidbody>();
+        List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
+        
         foreach (Collider col in Physics.OverlapSphere(transform.position, _powerfulRange + _weakRange))
         {
-            if (col.attachedRigidbody == null || col.attachedRigidbody.isKinematic)
+            if (col.attachedRigidbody == null)
                 continue;
-            
+
             if (col.attachedRigidbody == myRB)
                 continue;
-            
-            dynamicRigidbodies.Add(col.attachedRigidbody);
-        }
-        
-        return dynamicRigidbodies.ToArray();
-    }
 
+            Vector3 diff = col.transform.position - transform.position;
+
+            Vector3 bestLaunchVec = diff.normalized;
+
+            float lerpAmount = diff.magnitude > _powerfulRange ? _weakLift : _powerfulLift;
+
+            bestLaunchVec = Vector3.Lerp(bestLaunchVec, Vector3.up, lerpAmount).normalized;
+            
+            potentialExplosions.Add(new PotentialExplosionData(col.attachedRigidbody, this, bestLaunchVec));
+        }
+
+        return potentialExplosions.ToArray();
+    }
+    
     public override void Explode(Vector3 position, Vector3 facing)
     {
         GenerateAllSnapDirections();

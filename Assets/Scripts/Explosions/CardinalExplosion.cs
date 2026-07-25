@@ -23,7 +23,7 @@ public class CardinalExplosion : ExplosionBase
     [SerializeField]
     private GameObject _particlePrefab;
     
-    public override Rigidbody[] GetObjectsInRange()
+    public override PotentialExplosionData[] GetPotentialExplosions()
     {
         Debug.Log("Not implemented");
         return null;
