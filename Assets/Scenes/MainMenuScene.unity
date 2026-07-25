@@ -4736,8 +4736,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 863a195c932bf48fa86f15e74cc466c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AoeCircleGenerator
-  _powerfulRange: 2
-  _weakRange: 2
+  _powerfulRange: 1
+  _weakRange: 3
   _weakMaterial: {fileID: 2100000, guid: d639a5fb94b224d43b06d94b8d453521, type: 2}
   _powerfulMaterial: {fileID: 2100000, guid: 174e69ad3a6c8430b9f8a535d1832e55, type: 2}
   _meshRenderer: {fileID: 1781262135}
