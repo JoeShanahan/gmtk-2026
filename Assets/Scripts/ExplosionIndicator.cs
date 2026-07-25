@@ -8,7 +8,9 @@ public class ExplosionIndicator : MonoBehaviour
 {
 	public Rigidbody RBToTrack { get; private set; }
 
-	[SerializeField] private GameObject _gfx;
+	[SerializeField] private GameObject _mainGFX;
+	[Tooltip("i added this because at certain rotations, the flat arrow wasn't reading well")]
+	[SerializeField] private MeshRenderer _secondaryGFX;
 	[SerializeField] private Material _material;
 	
 	[Header("Weak Visuals")] 
@@ -26,8 +28,8 @@ public class ExplosionIndicator : MonoBehaviour
 	{
 		RBToTrack = rbToTrack;
 
-		_cachedStartingScale = _gfx.transform.localScale.x;
-		_materialInstance = _gfx.GetComponent<MeshRenderer>().material;
+		_cachedStartingScale = _mainGFX.transform.localScale.x;
+		_materialInstance = _mainGFX.GetComponent<MeshRenderer>().material;
 	}
 	
 	public void UpdateIndicator(ExplosionBase.PotentialExplosionData data)
@@ -58,9 +60,10 @@ public class ExplosionIndicator : MonoBehaviour
 	private void SetStrengthVisual(bool isWeakRange)
 	{
 		float scaleMultiplier = isWeakRange ? _weakScaleMultiplier : _strongScaleMultiplier;
-		_gfx.transform.localScale = Vector3.one * (scaleMultiplier * _cachedStartingScale);
+		_mainGFX.transform.localScale = Vector3.one * (scaleMultiplier * _cachedStartingScale);
 
 		_materialInstance.color = isWeakRange ? _weakColour : _strongColour;
+		_secondaryGFX.material = _materialInstance;
 	}
 
 	private void OnDestroy()
