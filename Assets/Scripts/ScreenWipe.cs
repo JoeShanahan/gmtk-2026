@@ -54,7 +54,7 @@ public class ScreenWipe : MonoBehaviour
 
         while (t < 1)
         {
-            t += Time.deltaTime / _transitionTime;
+            t += Time.unscaledDeltaTime / _transitionTime;
             t = Mathf.Clamp(t, 0, 1);
             SetPosition(t);
             yield return null;
@@ -66,7 +66,7 @@ public class ScreenWipe : MonoBehaviour
         
         while (t < 2)
         {
-            t += Time.deltaTime / _transitionTime;
+            t += Time.unscaledDeltaTime / _transitionTime;
             t = Mathf.Clamp(t, 1, 2);
             SetPosition(t);
             yield return null;
