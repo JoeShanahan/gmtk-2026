@@ -50,6 +50,7 @@ public class BombSpawner : MonoBehaviour
         
         BombDefinition bdata = _lookup.GetData(_type);
         GameObject newObj = Instantiate(bdata.Prefab, transform);
+        newObj.GetComponent<Rigidbody>().Move(transform.position, transform.rotation);
 
         newObj.GetComponent<BombCharacter>().Init(_bombLife);
     }
