@@ -10,7 +10,11 @@ public class BombManager : MonoBehaviour
     private List<BombCharacter> _allBombs;
 
     private BombCharacter _selectedBomb;
+
+    [SerializeField]
     private bool _isPaused = true;
+
+    private TimeManager _timeMan;
 
     public bool IsPaused => _isPaused;
 
@@ -67,6 +71,11 @@ public class BombManager : MonoBehaviour
         {
             HandleSwap();
         }
+        else if (_input.GameControl.SwapBack.WasPressedThisFrame())
+        {
+            HandleSwap(true);
+        }
+
 
         if (!_isPaused)
         {
@@ -77,7 +86,7 @@ public class BombManager : MonoBehaviour
         }
     }
 
-    public void HandleSwap()
+    public void HandleSwap(bool back=false)
     {
         if (_allBombs.Count < 2)
             return;
@@ -86,10 +95,19 @@ public class BombManager : MonoBehaviour
 
         int currentIndex = _allBombs.IndexOf(_selectedBomb);
         int nextIndex = (currentIndex + 1) % _allBombs.Count;
+
+        if (back)
+        {
+            nextIndex = currentIndex == 0 ? _allBombs.Count -1 : currentIndex - 1;
+        }
+        
         _selectedBomb.ReleaseControlOf();
 
         _selectedBomb = _allBombs[nextIndex];
         _selectedBomb.TakeControlOf();
+
+        _timeMan ??= FindAnyObjectByType<TimeManager>(FindObjectsInactive.Include);
+        _timeMan?.OnSwapPerformed();
     }
     
     

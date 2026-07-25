@@ -2181,6 +2181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _allBombs: []
+  _isPaused: 0
 --- !u!4 &645073075
 Transform:
   m_ObjectHideFlags: 0
@@ -4192,6 +4193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _pauseBorder: {fileID: 335453412}
+  _settings: {fileID: 0}
 --- !u!4 &1091593195
 Transform:
   m_ObjectHideFlags: 0

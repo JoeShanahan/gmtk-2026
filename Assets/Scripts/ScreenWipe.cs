@@ -60,9 +60,11 @@ public class ScreenWipe : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(_pauseTime - 0.05f);
+        yield return new WaitForSecondsRealtime(_pauseTime - 0.05f);
         transitionInComplete?.Invoke();
-        yield return new WaitForSeconds(0.05f);
+        yield return null;
+        yield return null;
+        yield return new WaitForSecondsRealtime(0.05f);
         
         while (t < 2)
         {
