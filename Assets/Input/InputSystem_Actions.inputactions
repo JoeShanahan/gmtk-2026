@@ -812,6 +812,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SwapBack",
+                    "type": "Button",
+                    "id": "f6964a0b-b8a3-4ec1-9f7b-b24545c2cd50",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "FFWD",
                     "type": "Button",
                     "id": "3f2ad50c-8674-413f-9e5a-cc486c60bfbd",
@@ -954,8 +963,8 @@
                 },
                 {
                     "name": "",
-                    "id": "b794c340-a175-4afe-b9b4-721043c43a3f",
-                    "path": "<Gamepad>/leftShoulder",
+                    "id": "8b4f3cee-0199-4acb-8ef4-14bdc172e950",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -965,12 +974,34 @@
                 },
                 {
                     "name": "",
-                    "id": "8b4f3cee-0199-4acb-8ef4-14bdc172e950",
-                    "path": "<Gamepad>/rightShoulder",
+                    "id": "cc179c3c-08a3-4626-8c3b-ab256a863c73",
+                    "path": "<Keyboard>/period",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Swap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82093cd7-4067-4cdc-82f3-86741fb056a4",
+                    "path": "<Keyboard>/comma",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c7dea198-acae-42e1-a475-739b333b99c3",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwapBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

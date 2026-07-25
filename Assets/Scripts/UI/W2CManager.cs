@@ -24,6 +24,11 @@ namespace WorldToCanvas
 
         public static W2C Instantiate(GameObject prefab)
         {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<W2CManager>(FindObjectsInactive.Include);
+            }
+            
             // Check we've set up the singleton first
             if (_instance == null)
             {

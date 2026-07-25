@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -11,8 +13,12 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] 
     private MainGameLevelSet _mainGameLevels;
+
+    [SerializeField] private Transform _mainGameUi;
+    [SerializeField] private Transform _startGameUi;
     
     private InputSystem_Actions _input;
+    
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,11 +27,16 @@ public class LevelManager : MonoBehaviour
         _input.Enable();
         if (_mainGameLevels != null && _mainGameLevels.SelectedLevel != null)
         {
-            InstantiateLevel(_mainGameLevels.SelectedLevel);
+            InstantiateLevel(_mainGameLevels.SelectedLevel, true);
         }
     }
-    
-    public void InstantiateLevel(LevelData level)
+
+    private void OnDestroy()
+    {
+        _input.Disable();
+    }
+
+    public void InstantiateLevel(LevelData level, bool showStartScreen)
     {
         if (_levelInstance != null)
         {
@@ -36,6 +47,32 @@ public class LevelManager : MonoBehaviour
         _currentSeconds = 0;
         _levelInstance = Instantiate(level.Prefab).GetComponent<SpawnedLevel>();
         _debugUi?.SetActive(false);
+
+        var startScreen = FindAnyObjectByType<StartLevelScreen>();
+
+        if (showStartScreen && startScreen!= null)
+        {
+            startScreen.SetLevel(level);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            _levelInstance.SwapToMainCam();
+        }
+    }
+
+    public void BeginLevel()
+    {
+        if (_startGameUi != null)
+            _startGameUi.gameObject.SetActive(false);
+        
+        if (_mainGameUi != null)
+            _mainGameUi.gameObject.SetActive(true);
+        
+        FindAnyObjectByType<BombManager>()?.SetPause(false);
+        _levelInstance.SwapToMainCam();
+
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -59,6 +96,6 @@ public class LevelManager : MonoBehaviour
         if (_selectedLevel == null)
             return;
         
-        PersistentUI.DoTransition(() => InstantiateLevel(_selectedLevel));
+        PersistentUI.DoTransition(() => InstantiateLevel(_selectedLevel, false));
     }
 }
