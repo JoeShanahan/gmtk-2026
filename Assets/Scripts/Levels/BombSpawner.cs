@@ -13,6 +13,7 @@ public class BombSpawner : MonoBehaviour
     [SerializeField] private BombLookup _lookup;
 
     private float _currentTime;
+    private BombManager _bombManager;
     
     private void OnValidate()
     {
@@ -21,11 +22,15 @@ public class BombSpawner : MonoBehaviour
 
     private void Start()
     {
+        _bombManager = FindAnyObjectByType<BombManager>(FindObjectsInactive.Include);
         _currentTime = _delay;
     }
 
     private void Update()
     {
+        if (_bombManager.IsPaused)
+            return;
+        
         _currentTime -= Time.deltaTime * 10;
 
         if (_currentTime <= 0)

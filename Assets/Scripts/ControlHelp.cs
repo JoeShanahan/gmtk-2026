@@ -18,6 +18,11 @@ public class ControlHelp : MonoBehaviour
         _input = new InputSystem_Actions();
         _input.Enable();
     }
+    
+    private void OnDestroy()
+    {
+        _input.Disable();
+    }
 
     public void ButtonPressMenu()
     {

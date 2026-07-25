@@ -2,15 +2,12 @@ using UnityEngine;
 
 public class SpawnedLevel : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Transform _mainCam;
+    [SerializeField] private Transform _previewCam;
 
-    // Update is called once per frame
-    void Update()
+    public void SwapToMainCam()
     {
-        
+        _mainCam?.gameObject.SetActive(true);
+        _previewCam?.gameObject.SetActive(true);
     }
 }

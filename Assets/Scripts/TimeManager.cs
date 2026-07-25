@@ -15,6 +15,11 @@ public class TimeManager : MonoBehaviour
         _input.Enable();
         _pauseBorder.gameObject.SetActive(_isPaused);
     }
+    
+    private void OnDestroy()
+    {
+        _input.Disable();
+    }
 
     // Update is called once per frame
     void Update()

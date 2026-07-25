@@ -10,6 +10,14 @@ public class BombManager : MonoBehaviour
     private List<BombCharacter> _allBombs;
 
     private BombCharacter _selectedBomb;
+    private bool _isPaused = true;
+
+    public bool IsPaused => _isPaused;
+
+    public void SetPause(bool isPaused)
+    {
+        _isPaused = isPaused;
+    }
     
     public static void Register(BombCharacter character) => Instance?.RegisterBomb(character);
     public static void Unregister(BombCharacter character) => Instance?.UnregisterBomb(character);
@@ -58,6 +66,14 @@ public class BombManager : MonoBehaviour
         if (_input.GameControl.Swap.WasPressedThisFrame())
         {
             HandleSwap();
+        }
+
+        if (!_isPaused)
+        {
+            foreach (BombCharacter b in _allBombs)
+            {
+                b.DoUpdate();
+            }
         }
     }
 
