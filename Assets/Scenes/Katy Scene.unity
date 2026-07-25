@@ -425,6 +425,63 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1001 &1750994226
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.391012
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.000000005790298
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.318546
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+      propertyPath: m_Name
+      value: GrasslandsTerrain
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
 --- !u!1001 &7532692614090464778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -495,3 +552,4 @@ SceneRoots:
   - {fileID: 7532692614090464778}
   - {fileID: 784278706}
   - {fileID: 567000457}
+  - {fileID: 1750994226}
