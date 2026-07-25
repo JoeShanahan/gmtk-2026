@@ -31,13 +31,14 @@ public class ExplosionIndicator : MonoBehaviour
 		
 		// set rotation 
 		var rotation = _arrowGFX.transform.rotation;
-		rotation.eulerAngles = new Vector3(0, 0, GetZRotationAngle());
+		rotation.eulerAngles = new Vector3(90, GetYRotationAngle(), 0);
 		_arrowGFX.transform.rotation = rotation;
 	}
 
-	private float GetZRotationAngle()
+	private float GetYRotationAngle()
 	{
-		// needs to know closest bomb , and its explosion direction
+		// need to use target and bomb (both are known) to get explosion direction of target 
+		// then convert this into a Y axis angle for the indicator
 		return 0;
 	}
 	

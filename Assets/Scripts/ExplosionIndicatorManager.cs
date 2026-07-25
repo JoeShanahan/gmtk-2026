@@ -4,7 +4,7 @@ using UnityEngine;
 public class ExplosionIndicatorManager : MonoBehaviour
 {
 	[SerializeField] private ExplosionIndicator _indicatorPrefab;
-	private List<ExplosionIndicator> _activeExplosionIndicators;
+	private List<ExplosionIndicator> _activeExplosionIndicators = new List<ExplosionIndicator>();
 	
 	private void Update()
 	{

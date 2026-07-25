@@ -26,11 +26,15 @@ public class AllDirectionExplosion : ExplosionBase
     public override Rigidbody[] GetObjectsInRange()
     {
         GenerateAllSnapDirections();
+        Rigidbody myRB = GetComponent<Rigidbody>();
 
         List<Rigidbody> dynamicRigidbodies = new List<Rigidbody>();
         foreach (Collider col in Physics.OverlapSphere(transform.position, _powerfulRange + _weakRange))
         {
             if (col.attachedRigidbody == null || col.attachedRigidbody.isKinematic)
+                continue;
+            
+            if (col.attachedRigidbody == myRB)
                 continue;
             
             dynamicRigidbodies.Add(col.attachedRigidbody);

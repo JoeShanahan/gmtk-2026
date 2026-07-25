@@ -19,7 +19,8 @@ public class VerticalExplosion : ExplosionBase
 
     public override Rigidbody[] GetObjectsInRange()
     {
-        return new Rigidbody[] { };
+        Debug.Log("Not implemented");
+        return null;
     }
 
     public override void Explode(Vector3 position, Vector3 facing)
