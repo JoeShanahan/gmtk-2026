@@ -16,6 +16,6 @@ public class DebugLevelSelectButton : MonoBehaviour
     
     public void OnPress()
     {
-        FindAnyObjectByType<LevelManager>().InstantiateLevel(_levelData);
+        FindAnyObjectByType<LevelManager>().InstantiateLevel(_levelData, true);
     }
 }
