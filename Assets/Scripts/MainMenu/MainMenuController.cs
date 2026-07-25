@@ -16,9 +16,9 @@ public class MainMenuController : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-// #if UNITY_WEBGL
+#if UNITY_WEBGL
     _quitButton.gameObject.SetActive(false);
-// #endif
+#endif
     }
 
     private void SwapPage(MainMenuPage.PageType ptype)
