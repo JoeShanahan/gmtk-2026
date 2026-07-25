@@ -71,6 +71,7 @@ public class LevelManager : MonoBehaviour
         
         FindAnyObjectByType<BombManager>()?.SetPause(false);
         _levelInstance.SwapToMainCam();
+
         Time.timeScale = 1;
     }
 

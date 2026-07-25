@@ -10,11 +10,12 @@ public class BombManager : MonoBehaviour
     private List<BombCharacter> _allBombs;
 
     private BombCharacter _selectedBomb;
+
     [SerializeField]
     private bool _isPaused = true;
 
     private TimeManager _timeMan;
-    
+
     public bool IsPaused => _isPaused;
 
     public void SetPause(bool isPaused)
@@ -74,6 +75,7 @@ public class BombManager : MonoBehaviour
         {
             HandleSwap(true);
         }
+
 
         if (!_isPaused)
         {
