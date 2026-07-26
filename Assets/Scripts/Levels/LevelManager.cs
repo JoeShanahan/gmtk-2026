@@ -130,7 +130,7 @@ public class LevelManager : MonoBehaviour
     {
         float levelTime = _timeManager.timer;
         
-        _timeManager.PauseTime();
+        // _timeManager.PauseTime();
         currentMedal = CalculateMedal(Mathf.FloorToInt(levelTime * 10));
         // SaveManager.Instance.SetLevelInfo(_selectedLevel.name, _timeManager.formattedTimer);
         
