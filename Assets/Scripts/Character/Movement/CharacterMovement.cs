@@ -16,6 +16,8 @@ public class CharacterMovement : MonoBehaviour
     public Vector3 VelocityDirection => _rb.linearVelocity.magnitude > 0.01f ? _rb.linearVelocity.normalized : transform.forward;
 
     public Vector3 ActualVelocity => _rb.linearVelocity;
+
+    [SerializeField] private Animator _anim;
     
     [SerializeField] GroundInfo _ground;
     [SerializeField] MoveInfo _move;
@@ -64,6 +66,18 @@ public class CharacterMovement : MonoBehaviour
         if (_isLocked)
             return;
 
+        if (_anim != null)
+        {
+            if (IsGrounded)
+            {
+                _anim.SetFloat("MoveSpeed", _move.velocity.magnitude);
+            }
+            else
+            {
+                _anim.SetFloat("MoveSpeed", 0);
+            }
+        }
+
         if (IsGrounded && _move.velocity.magnitude > 0.1f)
         {
             Vector3 desiredDirection = _move.velocity;
@@ -97,7 +111,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (_rb.isKinematic == false)
             _rb.linearVelocity = _move.velocity;
-    
+        
         ClearState();
     }
 

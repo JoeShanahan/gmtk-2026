@@ -23,8 +23,40 @@ public class AllDirectionExplosion : ExplosionBase
     private GameObject _particlePrefab;
 
     
+    public override PotentialExplosionData[] GetPotentialExplosions()
+    {
+        GenerateAllSnapDirections();
+        
+        List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
+        
+        foreach (Collider col in Physics.OverlapSphere(transform.position, _powerfulRange + _weakRange))
+        {
+            if (col.attachedRigidbody == null)
+                continue;
+
+            if (col.attachedRigidbody == _myRB)
+                continue;
+
+            Vector3 diff = col.transform.position - transform.position;
+
+            Vector3 bestLaunchVec = diff.normalized;
+
+            bool isWeakRange = diff.magnitude > _powerfulRange; 
+
+            float lerpAmount = isWeakRange ? _weakLift : _powerfulLift;
+
+            bestLaunchVec = Vector3.Lerp(bestLaunchVec, Vector3.up, lerpAmount).normalized;
+            
+            potentialExplosions.Add(new PotentialExplosionData(col.attachedRigidbody, this, isWeakRange, bestLaunchVec));
+        }
+
+        return potentialExplosions.ToArray();
+    }
+    
     public override void Explode(Vector3 position, Vector3 facing)
     {
+        base.Explode(position, facing);
+        
         GenerateAllSnapDirections();
         
         foreach (Collider col in Physics.OverlapSphere(position, _powerfulRange + _weakRange))
@@ -44,6 +76,7 @@ public class AllDirectionExplosion : ExplosionBase
         }
         
         GameObject newObj = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
+        newObj.transform.position += new Vector3(0, 0.5f, 0);
         Destroy(newObj, 8);
     }
 

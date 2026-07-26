@@ -19,6 +19,19 @@ public class MainMenuController : MonoBehaviour
 #if UNITY_WEBGL
     _quitButton.gameObject.SetActive(false);
 #endif
+        
+        _allPages = FindObjectsByType<MainMenuPage>(FindObjectsInactive.Include);
+        foreach (MainMenuPage p in _allPages)
+        {
+            if (p.Type == MainMenuPage.PageType.Root)
+            {
+                p.SetInteractable(true);
+            }
+            else
+            {
+                p.SetInteractable(false);
+            }
+        }
     }
 
     private void SwapPage(MainMenuPage.PageType ptype)
@@ -26,7 +39,6 @@ public class MainMenuController : MonoBehaviour
         if (_allPages == null || _allPages.Length == 0)
         {
             _allPages = FindObjectsByType<MainMenuPage>(FindObjectsInactive.Include);
-
         }
         
         MainMenuPage foundPage = _allPages.FirstOrDefault(p => p.Type == ptype);
@@ -39,12 +51,19 @@ public class MainMenuController : MonoBehaviour
             if (p.Type == ptype)
             {
                 p.SnapTo(_inactivePos);
+                p.SetInteractable(true);
                 p.SlideTo(_activePos, _transitionTime, _ease);
             }
             else
             {
                 p.SlideTo(_inactivePos, _transitionTime, _ease);
+                p.SetInteractable(false);
             }
+        }
+
+        if (foundPage.Type == MainMenuPage.PageType.LevelSelect)
+        {
+            foundPage.GetComponent<LevelSelectPage>().SelectFirstLevel();
         }
     }
 

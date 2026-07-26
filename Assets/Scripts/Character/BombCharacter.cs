@@ -66,7 +66,7 @@ public class BombCharacter : MonoBehaviour
     }
 
     public void DoUpdate()
-    {
+    { 
         HandlePlayerInput();
         _remainingTime -= Time.deltaTime;
         _remainingTime = Mathf.Max(_remainingTime, 0);

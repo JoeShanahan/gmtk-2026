@@ -23,14 +23,56 @@ public class SingleDirectionExplosion : ExplosionBase
 
     [SerializeField]
     private GameObject _particlePrefab;
-
+    
     private void Start()
     {
         GenerateAllSnapDirections();
     }
-    
+
+    public override PotentialExplosionData[] GetPotentialExplosions()
+    {
+        List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
+
+        Vector3 startPos = transform.position - (_snappedForward * _coneClip);
+        float totalRange = _coneClip + _powerfulRange + _weakRange;
+
+        foreach (Collider col in Physics.OverlapSphere(startPos, totalRange))
+        {
+            if (col.attachedRigidbody == null)
+                continue;
+
+            if (col.attachedRigidbody == _myRB)
+            {
+                continue;
+            }
+
+            Vector3 diff = col.transform.position - startPos;
+            _snappedForward = GetClosestDirection(_movement.Forward);
+
+            float angle = Mathf.Abs(Vector3.Angle(diff.normalized, _snappedForward));
+            
+            if (angle > _coneAngle / 2)
+                continue;
+
+            if (diff.magnitude < _coneClip)
+                continue;
+            
+            bool isLargeForce = diff.magnitude < _coneClip + _powerfulRange;
+
+            float lerpAmount = isLargeForce ? _powerfulLift : _weakLift;
+            
+            Vector3 bestLaunchVec = Vector3.Lerp(_snappedForward, Vector3.up, lerpAmount).normalized;
+            
+            potentialExplosions.Add(new PotentialExplosionData(col.attachedRigidbody, this, !isLargeForce, bestLaunchVec));
+        }
+
+        return potentialExplosions.ToArray();
+    }
+
     public override void Explode(Vector3 position, Vector3 facing)
     {
+        base.Explode(position, facing);
+        
         Vector3 startPos = transform.position - (_snappedForward * _coneClip);
         float totalRange = _coneClip + _powerfulRange + _weakRange;
 

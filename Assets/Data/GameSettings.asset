@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb22a64a0b7d4a81a87036031f54846, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: Assembly-CSharp::GameSettings
+  SoundEnabled: 1
+  MusicEnabled: 1
+  PauseSpeed: 0.05
+  AutoPauseOnSwap: 0
