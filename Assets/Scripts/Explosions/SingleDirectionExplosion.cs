@@ -23,16 +23,22 @@ public class SingleDirectionExplosion : ExplosionBase
 
     [SerializeField]
     private GameObject _particlePrefab;
+    
+    ScreenShake _screenShake;
+
 
     private void Start()
     {
         GenerateAllSnapDirections();
+        _screenShake = FindAnyObjectByType<ScreenShake>();
     }
     
     public override void Explode(Vector3 position, Vector3 facing)
     {
         Vector3 startPos = transform.position - (_snappedForward * _coneClip);
         float totalRange = _coneClip + _powerfulRange + _weakRange;
+        
+        _screenShake.Shake(2f);
 
         foreach (Collider col in Physics.OverlapSphere(startPos, totalRange))
         {

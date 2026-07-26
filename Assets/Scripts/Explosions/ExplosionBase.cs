@@ -8,6 +8,13 @@ public abstract class ExplosionBase : MonoBehaviour
     
     protected List<Vector3> _allSnapPoints;
 
+    ScreenShake _screenShake;
+
+    private void Awake()
+    {
+        _screenShake = FindAnyObjectByType<ScreenShake>();
+    }
+    
     protected void GenerateAllSnapDirections()
     {
         _allSnapPoints = new List<Vector3>();
@@ -31,7 +38,7 @@ public abstract class ExplosionBase : MonoBehaviour
     
     public virtual void Explode(Vector3 position, Vector3 facing)
     {
-        
+        _screenShake.Shake(2f);
     }
 
     protected Vector3 GetClosestDirection(Vector3 originalDirection)

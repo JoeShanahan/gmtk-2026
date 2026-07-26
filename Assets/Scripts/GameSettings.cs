@@ -7,6 +7,7 @@ public class GameSettings : ScriptableObject
     public bool MusicEnabled = true;
     public float PauseSpeed = 0.05f;
     public bool AutoPauseOnSwap;
+    public bool ScreenShakeModifier = true; // On by default
     
     public void SaveToPrefs()
     {
