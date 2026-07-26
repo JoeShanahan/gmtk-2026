@@ -22,6 +22,12 @@ public class AllDirectionExplosion : ExplosionBase
     [SerializeField]
     private GameObject _particlePrefab;
     
+    ScreenShake _screenShake;
+
+    private void Awake()
+    {
+        _screenShake = FindAnyObjectByType<ScreenShake>();
+    }
 
     public override PotentialExplosionData[] GetPotentialExplosions()
     {
@@ -56,6 +62,8 @@ public class AllDirectionExplosion : ExplosionBase
     public override void Explode(Vector3 position, Vector3 facing)
     {
         GenerateAllSnapDirections();
+        
+        _screenShake.Shake(2f);
         
         foreach (Collider col in Physics.OverlapSphere(position, _powerfulRange + _weakRange))
         {
