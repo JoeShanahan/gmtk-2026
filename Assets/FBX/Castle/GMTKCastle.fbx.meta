@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: e21fe0c66eaf09047a0d1f32f86ba0a7
+guid: 003292b0dea14fd468798fa3ab54a3f5
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: CastleTextureedit
+    second: {fileID: 2800000, guid: 091fe657614f2464cae603868ff9eafa, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
