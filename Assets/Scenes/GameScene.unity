@@ -509,11 +509,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf98e5af14aa46ada7679f4fb074817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  currentMedal: 
+  currentMedal: 0
   _debugUi: {fileID: 908920813}
   _mainGameLevels: {fileID: 0}
+  _levelCompleteScreen: {fileID: 0}
   _mainGameUi: {fileID: 0}
   _startGameUi: {fileID: 0}
+  _secondarySaveData: {fileID: 0}
 --- !u!4 &181668271
 Transform:
   m_ObjectHideFlags: 0
