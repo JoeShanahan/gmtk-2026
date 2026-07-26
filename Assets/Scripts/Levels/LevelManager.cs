@@ -139,6 +139,7 @@ public class LevelManager : MonoBehaviour
 
         _levelCompleteScreen.CompleteLevel(levelTime, previousBest, _selectedLevel, currentMedal);
         //Show UI elements
+        Debug.Log("Level Complete");
     }
     
     LevelRank CalculateMedal(int timer)
