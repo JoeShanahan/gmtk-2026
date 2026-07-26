@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainGameLevelSet
   _saveData: {fileID: 11400000, guid: d60bce4b7236d40408a04ce1f3823160, type: 2}
   _levels:
-  - {fileID: 11400000, guid: 1ef81688b44ce499a945b7f92599f9e8, type: 2}
-  - {fileID: 11400000, guid: b5f4b4881b1cb4e73ac1e98e75e57010, type: 2}
   - {fileID: 11400000, guid: 4c4743534dee49540845e42300a38cf3, type: 2}
   - {fileID: 11400000, guid: 324279efefda7c44ea341f4ad863a005, type: 2}
   - {fileID: 11400000, guid: 82fceccbd0df23a44aa0d80b102783ab, type: 2}
