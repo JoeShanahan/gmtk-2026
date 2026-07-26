@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7814acb591a4b168fcc92243eb808d, type: 3}
   m_Name: SaveData
   m_EditorClassIdentifier: Assembly-CSharp::SaveData
+  _bestTimes: []
