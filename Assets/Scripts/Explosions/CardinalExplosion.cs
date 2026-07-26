@@ -22,13 +22,6 @@ public class CardinalExplosion : ExplosionBase
 
     [SerializeField]
     private GameObject _particlePrefab;
-
-    ScreenShake _screenShake;
-
-    private void Awake()
-    {
-        _screenShake = FindAnyObjectByType<ScreenShake>();
-    }
     
     public override PotentialExplosionData[] GetPotentialExplosions()
     {
@@ -61,9 +54,9 @@ public class CardinalExplosion : ExplosionBase
 
     public override void Explode(Vector3 position, Vector3 facing)
     {
-        GenerateAllSnapDirections();
+        base.Explode(position, facing);
         
-        _screenShake.Shake(2f);
+        GenerateAllSnapDirections();
         
         foreach (Collider col in Physics.OverlapSphere(position, _powerfulRange + _weakRange))
         {

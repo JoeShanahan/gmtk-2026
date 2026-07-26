@@ -17,13 +17,6 @@ public class VerticalExplosion : ExplosionBase
     [SerializeField]
     private GameObject _particlePrefab;
     
-    ScreenShake _screenShake;
-
-    private void Awake()
-    {
-        _screenShake = FindAnyObjectByType<ScreenShake>();
-    }
-
     public override PotentialExplosionData[] GetPotentialExplosions()
     {
         List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
@@ -60,14 +53,14 @@ public class VerticalExplosion : ExplosionBase
 
     public override void Explode(Vector3 position, Vector3 facing)
     {
+        base.Explode(position, facing);
+        
         float totalRange = _downwardsRange + _powerfulRange + _weakRange;
         Vector3 bottom = transform.position - new Vector3(0, _downwardsRange, 0);
         Vector3 top = transform.position + (Vector3.up * (_powerfulRange + _weakRange));
         Vector3 mid = Vector3.Lerp(top, bottom, 0.5f);
 
         Vector2 my2Dpos = new Vector2(transform.position.x, transform.position.z);
-        
-        _screenShake.Shake(2f);
         
         foreach (Collider col in Physics.OverlapSphere(mid, totalRange / 2))
         {
