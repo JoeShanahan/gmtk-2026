@@ -25,11 +25,17 @@ public class BombCharacter : MonoBehaviour
     private GameObject _uiPrefab;
 
     private BombCharacterUI _uiInstance;
+    private bool _isTutorial;
 
-    public void Init(int life)
+    public void Init(int life, bool isTutorial=false)
     {
         _startTime = life;
         _remainingTime = life;
+
+        if (isTutorial)
+        {
+            _isTutorial = true;
+        }
     }
     
     void Start()
@@ -49,6 +55,9 @@ public class BombCharacter : MonoBehaviour
 
     public void TakeControlOf()
     {
+        if (_isTutorial)
+            return;
+        
         _input.Enable();
         IsBeingControlled = true;
     }
