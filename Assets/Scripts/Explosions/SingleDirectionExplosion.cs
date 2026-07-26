@@ -105,6 +105,11 @@ public class SingleDirectionExplosion : ExplosionBase
         GameObject newObj = Instantiate(_particlePrefab, transform.position, Quaternion.LookRotation(facing, Vector3.up));
         Destroy(newObj, 8);
     }
+    
+    public override void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer)
+    {
+        Debug.Log("Not implemented");
+    }
 
     private Vector3 _cachedDirection;
     private Vector3 _snappedForward;

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,7 +11,7 @@ public class AllDirectionExplosion : ExplosionBase
     [SerializeField] private float _powerfulForce = 20;
     [SerializeField] private float _weakForce = 10;
 
-    [Header("Lift")] 
+    [Header("Lift")]
     [SerializeField, Range(0, 0.5f), Header("How much to Lerp upwards (percentage)")] 
     private float _powerfulLift = 0.1f;
     
@@ -80,8 +79,37 @@ public class AllDirectionExplosion : ExplosionBase
         Destroy(newObj, 8);
     }
 
+    public override void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer)
+    {
+        Vector3 yOffset = new Vector3(0, 0.5f, 0);
 
-    public void OnDrawGizmos()
+        List<Vector3> weakRangePoints = new List<Vector3>();
+        List<Vector3> strongRangePoints = new List<Vector3>();
+
+        for (int i = 0; i < 32; i++)
+        {
+            float circA = (Mathf.PI * 2 / 32) * i;
+
+            Vector3 pointA = new Vector3(Mathf.Cos(circA) * _powerfulRange, 0, Mathf.Sin(circA) * _powerfulRange);
+            Vector3 pointA2 = new Vector3(Mathf.Cos(circA) * (_powerfulRange + _weakRange), 0,
+                Mathf.Sin(circA) * (_powerfulRange + _weakRange));
+            
+            strongRangePoints.Add(pointA + transform.position + yOffset);
+            weakRangePoints.Add(pointA2 + transform.position + yOffset);
+        }
+        
+        // close circle by making the last point the same as first point
+        strongRangePoints.Add(strongRangePoints[0]);
+        weakRangePoints.Add(weakRangePoints[0]);
+
+        strongRangeRenderer.positionCount = strongRangePoints.Count;
+        strongRangeRenderer.SetPositions(strongRangePoints.ToArray());
+
+        weakRangeRenderer.positionCount = weakRangePoints.Count;
+        weakRangeRenderer.SetPositions(weakRangePoints.ToArray());
+    }
+
+    private void OnDrawGizmos()
     {
         Vector3 littleUp = new Vector3(0, -0.45f, 0);
         
@@ -101,7 +129,6 @@ public class AllDirectionExplosion : ExplosionBase
             
             pointA2 += transform.position + littleUp;
             pointB2 += transform.position + littleUp;
-            
             
             Debug.DrawLine(pointA, pointB, Color.red);
             Debug.DrawLine(pointA2, pointB2, Color.orange);
