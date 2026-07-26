@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LevelSelectPage : MonoBehaviour
 {
@@ -29,6 +30,18 @@ public class LevelSelectPage : MonoBehaviour
     }
 
     private const string MAIN_SCENE_NAME = "RealGameScene";
+
+    public void SelectFirstLevel()
+    {
+        foreach (Transform t in _gridRect)
+        {
+            if (t.gameObject.activeSelf)
+            {
+                EventSystem.current.SetSelectedGameObject(t.gameObject);
+                return;
+            }
+        }
+    }
     
     public void GoToGame()
     {
