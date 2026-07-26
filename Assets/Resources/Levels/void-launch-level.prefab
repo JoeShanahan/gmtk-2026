@@ -1811,6 +1811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   shake: 0
+  _settings: {fileID: 11400000, guid: 87cc9335b01bb4898870ff0bd62600d8, type: 2}
   doShake: 0
 --- !u!1 &5893311251777385748
 GameObject:
