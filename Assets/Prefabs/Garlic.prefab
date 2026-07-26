@@ -127,7 +127,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: e21fe0c66eaf09047a0d1f32f86ba0a7, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: -876546973899608171, guid: 8dc08ed9ba3aa46509a8040ea8edcef2, type: 3}
+      objectReference: {fileID: 1596229923242466822, guid: 3b203561f9f4f3147a1d86be9ea02b67, type: 3}
     - target: {fileID: 919132149155446097, guid: e21fe0c66eaf09047a0d1f32f86ba0a7, type: 3}
       propertyPath: m_Name
       value: Garlic Ball

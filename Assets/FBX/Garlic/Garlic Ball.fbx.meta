@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 8dc08ed9ba3aa46509a8040ea8edcef2
+guid: e21fe0c66eaf09047a0d1f32f86ba0a7
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: GarlicTexture
-    second: {fileID: 2800000, guid: ad8737329e6e7b74dae2ec7cf38053ea, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
