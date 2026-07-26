@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c2f11e60ff8b4f8ca618f87e48b8e51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayAudioRespectSettings
-  _sound: {fileID: 0}
+  _sound: {fileID: 7047618051938090001}
   _settings: {fileID: 11400000, guid: 87cc9335b01bb4898870ff0bd62600d8, type: 2}
   _volume: 1
   _minRandomPitch: 1

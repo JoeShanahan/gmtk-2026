@@ -90,9 +90,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7799517
-  m_Height: 3.89218
+  m_Height: 3.51
   m_Direction: 1
-  m_Center: {x: -0.0034780502, y: 1.44609, z: 0.034912467}
+  m_Center: {x: 0, y: 1.77, z: 0}
 --- !u!114 &6398729051512819130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba846d96dc2d40f0aa6e2878bf3b52c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterMovement
+  _anim: {fileID: 2483828526783830470}
   _ground:
     maxSlopeAngle: 25
     maxSnapSpeed: 100
@@ -269,10 +270,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3838b5aa28b6bf143802df4cf5c1be53, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2483828526783830470}
   m_SourcePrefab: {fileID: 100100000, guid: 3838b5aa28b6bf143802df4cf5c1be53, type: 3}
 --- !u!4 &2797312045960323363 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3838b5aa28b6bf143802df4cf5c1be53, type: 3}
   m_PrefabInstance: {fileID: 2402869418576021192}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3285900192071728025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3838b5aa28b6bf143802df4cf5c1be53, type: 3}
+  m_PrefabInstance: {fileID: 2402869418576021192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2483828526783830470
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3285900192071728025}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5e941e32d16c440b7b3d5cf2b818782e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
