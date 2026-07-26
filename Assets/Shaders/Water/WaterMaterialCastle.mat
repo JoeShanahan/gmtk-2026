@@ -58,7 +58,7 @@ Material:
     - _Specular_Speed: 1
     - _Specular_Thickness: 5
     - _Strength: 0.947
-    - _Wave_Amplitude: 0.1
+    - _Wave_Amplitude: 0.01
     - _Wave_Frequency: 1
     - _Wave_Speed: 0.5
     m_Colors:
