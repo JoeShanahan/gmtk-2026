@@ -14,7 +14,7 @@ public class BombManager : MonoBehaviour
     [SerializeField]
     private bool _isPaused = true;
 
-    private TimeManager _timeMan;
+    private PauseManager _pauseMan;
 
     public bool IsPaused => _isPaused;
 
@@ -106,8 +106,8 @@ public class BombManager : MonoBehaviour
         _selectedBomb = _allBombs[nextIndex];
         _selectedBomb.TakeControlOf();
 
-        _timeMan ??= FindAnyObjectByType<TimeManager>(FindObjectsInactive.Include);
-        _timeMan?.OnSwapPerformed();
+        _pauseMan ??= FindAnyObjectByType<PauseManager>(FindObjectsInactive.Include);
+        _pauseMan?.OnSwapPerformed();
     }
     
     
