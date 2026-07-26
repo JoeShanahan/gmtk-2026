@@ -132,7 +132,7 @@ public class LevelManager : MonoBehaviour
         
         _timeManager.PauseTime();
         currentMedal = CalculateMedal(Mathf.FloorToInt(levelTime * 10));
-        SaveManager.Instance.SetLevelInfo(_selectedLevel.name, _timeManager.formattedTimer);
+        // SaveManager.Instance.SetLevelInfo(_selectedLevel.name, _timeManager.formattedTimer);
         
         float previousBest = _secondarySaveData.GetBestTime(_selectedLevel.MainGameIndex);
         _secondarySaveData.SetBestTime(_selectedLevel.MainGameIndex, levelTime);
