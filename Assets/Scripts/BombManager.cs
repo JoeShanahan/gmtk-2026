@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class BombManager : MonoBehaviour
 {
+    public List<BombCharacter> AllBombs => _allBombs;
+    
     [SerializeField] 
     private List<BombCharacter> _allBombs;
 
@@ -26,7 +28,7 @@ public class BombManager : MonoBehaviour
     public static void Register(BombCharacter character) => Instance?.RegisterBomb(character);
     public static void Unregister(BombCharacter character) => Instance?.UnregisterBomb(character);
 
-    private static BombManager Instance
+    public static BombManager Instance
     {
         get
         {

@@ -23,10 +23,47 @@ public class CardinalExplosion : ExplosionBase
     [SerializeField]
     private GameObject _particlePrefab;
 
+    ScreenShake _screenShake;
+
+    private void Awake()
+    {
+        _screenShake = FindAnyObjectByType<ScreenShake>();
+    }
     
+    public override PotentialExplosionData[] GetPotentialExplosions()
+    {
+        GenerateAllSnapDirections();
+        
+        List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
+        foreach (Collider col in Physics.OverlapSphere(transform.position, _powerfulRange + _weakRange))
+        {
+            if (col.attachedRigidbody == null)
+                continue;
+            
+            if (col.attachedRigidbody == _myRB)
+                continue;
+
+            Vector3 diff = col.transform.position - transform.position;
+
+            Vector3 bestLaunchVec = GetClosestDirection(diff);
+            
+            bool isWeakRange = diff.magnitude > _powerfulRange; 
+
+            float lerpAmount = isWeakRange ? _weakLift : _powerfulLift;
+            
+            bestLaunchVec = Vector3.Lerp(bestLaunchVec, Vector3.up, lerpAmount).normalized;
+            
+            potentialExplosions.Add(new PotentialExplosionData(col.attachedRigidbody, this, isWeakRange, bestLaunchVec));
+        }
+
+        return potentialExplosions.ToArray();
+    }
+
     public override void Explode(Vector3 position, Vector3 facing)
     {
         GenerateAllSnapDirections();
+        
+        _screenShake.Shake(2f);
         
         foreach (Collider col in Physics.OverlapSphere(position, _powerfulRange + _weakRange))
         {
