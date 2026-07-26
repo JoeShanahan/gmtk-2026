@@ -25,6 +25,9 @@ MonoBehaviour:
   - Name: Katy
     Icon: {fileID: 21300000, guid: 4f86b046827f64720ac8f60ff556d01e, type: 3}
     ItchLink: https://gremalino.itch.io/
+  - Name: Kipuki
+    Icon: {fileID: 21300000, guid: 8eefba4f5297f457b8f4b172cf0269cf, type: 3}
+    ItchLink: https://kipuki.itch.io/
   - Name: Mosstalgia
     Icon: {fileID: 21300000, guid: 3fcf9adafbd4a4526b1788800a31d10a, type: 3}
     ItchLink: https://mosstalgia.itch.io/
