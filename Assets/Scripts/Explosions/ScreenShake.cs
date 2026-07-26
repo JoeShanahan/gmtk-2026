@@ -23,12 +23,11 @@ public class ScreenShake : MonoBehaviour
 
     void Update()
     {
-        shakeEnabled = _settings.ScreenShakeModifier;
-        if (doShake && shakeEnabled)
+        if (doShake)
         {
             if (shake > 0)
             {
-                _camera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
+                _camera.transform.localPosition = Random.insideUnitSphere * (shakeAmount * _settings.ScreenShakeModifier);
                 shake -= Time.deltaTime * decreaseFactor;
 
             }
