@@ -8,6 +8,7 @@ public class ImpendingExplosionVisual : MonoBehaviour
 {
 	[Header("Object to Affect")]
 	[SerializeField] private GameObject _gfxObject;
+	[SerializeField] private SkinnedMeshRenderer _bodyRenderer;
 	[SerializeField] private LineRenderer _weakExplosionRange;
 	[SerializeField] private LineRenderer _strongExplosionRange;
 	
@@ -18,10 +19,13 @@ public class ImpendingExplosionVisual : MonoBehaviour
 	[SerializeField, Range(0, 1)] private float _whenToScale;
 	[Tooltip("When there's % amount of time left, show range")]
 	[SerializeField, Range(0, 1)] private float _whenToShowRange;
+	[Tooltip("When there's % amount of time left, start to ramp wobble")]
+	[SerializeField, Range(0, 1)] private float _whenToWobble;
 	
 	[Header("Design Values")]
 	[SerializeField] private float _scaleMultiplier;
 	[SerializeField] private float _shakeIntensity;
+	[SerializeField] private float _targetWobbleIntensity = 0.1f;
 	
 	private BombCharacter _bombCharacter;
 	private ExplosionBase _explosionBase;
@@ -35,6 +39,7 @@ public class ImpendingExplosionVisual : MonoBehaviour
 		StartCoroutine(Co_ShakeVisual(remainingTimeInSeconds *  _whenToShake));
 		StartCoroutine(Co_ScaleVisual(remainingTimeInSeconds * _whenToScale));
 		StartCoroutine(Co_ExplosionRadius(remainingTimeInSeconds * _whenToShowRange));
+		StartCoroutine(Co_Wobble(remainingTimeInSeconds * _whenToWobble));
 	}
 	
 	private IEnumerator Co_ShakeVisual(float whenToShakeInSeconds)
@@ -66,5 +71,21 @@ public class ImpendingExplosionVisual : MonoBehaviour
 			_explosionBase.ShowExplosionRadius(_weakExplosionRange, _strongExplosionRange);
 			yield return null;
 		}
+	}
+
+	private IEnumerator Co_Wobble(float whenToWobble)
+	{
+		yield return new WaitUntil(() => _bombCharacter.RemainingTime * 0.1f <= whenToWobble);
+		Material instanceMaterial = _bodyRenderer.material;
+		string property = "_Wobble_Amount";
+
+		DOTween.To(
+				() => instanceMaterial.GetFloat(property),
+				x => instanceMaterial.SetFloat(property, x),
+				_targetWobbleIntensity,
+				_bombCharacter.RemainingTime * 0.1f
+			)
+			.SetLink(gameObject)
+			.SetEase(Ease.OutCirc);
 	}
 }
