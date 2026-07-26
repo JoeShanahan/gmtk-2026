@@ -27,7 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8348087553012204590}
   m_Father: {fileID: 6878703677571729154}
@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4394247282370592188}
   - component: {fileID: 2220034959689724278}
   - component: {fileID: 1412461666098177650}
+  - component: {fileID: 6386420422372117542}
   m_Layer: 0
   m_Name: Claymore
   m_TagString: Untagged
@@ -186,6 +187,23 @@ MonoBehaviour:
   _powerfulLift: 0.1
   _weakLift: 0.1
   _particlePrefab: {fileID: 2048184250282491274, guid: dd53b6ee7a2cb43f5891f3fef26bcbbf, type: 3}
+--- !u!114 &6386420422372117542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8472144850145563852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a1f4bb1bebd20458e179e8d8db4002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpendingExplosionVisual
+  _gfxObject: {fileID: 8331100088531361596}
+  _whenToShake: 0.3
+  _whenToScale: 0.05
+  _scaleMultiplier: 2
+  _shakeIntensity: 0.25
 --- !u!1001 &8381449712252380101
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,6 +263,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 7b145cd9812f6fb46bb7906139433a82, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7b145cd9812f6fb46bb7906139433a82, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7b145cd9812f6fb46bb7906139433a82, type: 3}
       propertyPath: m_Name
