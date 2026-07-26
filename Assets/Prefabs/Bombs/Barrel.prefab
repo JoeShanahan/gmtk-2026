@@ -200,13 +200,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpendingExplosionVisual
   _gfxObject: {fileID: 6406078350759272388}
+  _bodyRenderer: {fileID: 7436849366991784814}
   _weakExplosionRange: {fileID: 4200764265445751722}
   _strongExplosionRange: {fileID: 8803892255006717173}
-  _whenToShake: 0.1
+  _whenToShake: 0.2
   _whenToScale: 0.025
   _whenToShowRange: 0.3
+  _whenToWobble: 0.5
   _scaleMultiplier: 2
   _shakeIntensity: 0.25
+  _targetWobbleIntensity: 0.1
 --- !u!1001 &2402869418576021192
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,6 +270,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5568371526223589888, guid: 3838b5aa28b6bf143802df4cf5c1be53, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3838b5aa28b6bf143802df4cf5c1be53, type: 3}
       propertyPath: m_Name
       value: GMTK Upward Bomb
@@ -311,6 +318,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!137 &7436849366991784814 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5074512353664290214, guid: 3838b5aa28b6bf143802df4cf5c1be53, type: 3}
+  m_PrefabInstance: {fileID: 2402869418576021192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3008789722950149874
 PrefabInstance:
   m_ObjectHideFlags: 0
