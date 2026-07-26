@@ -5,7 +5,8 @@ using UnityEngine.Serialization;
 public class BombSpawner : MonoBehaviour
 {
     [SerializeField] private BombType _type;
-
+    [SerializeField] private bool _isTutorial;
+    
     [SerializeField] private int _bombLife =  50;
     [SerializeField] private int _respawnTime = 100;
     [SerializeField] private int _delay;
@@ -52,6 +53,6 @@ public class BombSpawner : MonoBehaviour
         GameObject newObj = Instantiate(bdata.Prefab, transform);
         newObj.GetComponent<Rigidbody>().Move(transform.position, transform.rotation);
 
-        newObj.GetComponent<BombCharacter>().Init(_bombLife);
+        newObj.GetComponent<BombCharacter>().Init(_bombLife, _isTutorial);
     }
 }
