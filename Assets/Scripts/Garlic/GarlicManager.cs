@@ -17,7 +17,9 @@ public class GarlicManager : MonoBehaviour
     [SerializeField] GameObject garlicPrefab;
     
     private InputSystem_Actions _input;
-    
+
+    [SerializeField] private int miny;
+    [SerializeField] private int maxy;
     void Awake()
     {
         InitSpawner();
@@ -34,6 +36,10 @@ public class GarlicManager : MonoBehaviour
         {
             RespawnGarlic(currentGarlic);
         }
+        
+        // Respawns garlic if it falls off the map, or goes so high it'll take too long to land
+        if (currentGarlic.transform.position.y < miny || currentGarlic.transform.position.y > maxy)
+            RespawnGarlic(currentGarlic);
     }
 
     /// <summary>

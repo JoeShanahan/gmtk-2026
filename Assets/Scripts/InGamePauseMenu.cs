@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public static class SpeedSettings
 {
@@ -17,7 +18,7 @@ public class InGamePauseMenu : MonoBehaviour
     [SerializeField] private CanvasGroup _grp;
     [SerializeField] private RectTransform _firstButton;
     [SerializeField] private GameSettings _settings;
-    [SerializeField] private TimeManager _timeMan;
+    [SerializeField] private PauseManager _pauseMan;
     [SerializeField] private Transform _mainGameUI;
 
     [Header("Texts")] 
@@ -59,7 +60,7 @@ public class InGamePauseMenu : MonoBehaviour
             DOTween.Kill(_grp);
             var tween = _grp.DOFade(0, 0.2f).SetEase(Ease.OutSine).OnComplete(() => _grp.gameObject.SetActive(false));
             tween.SetUpdate(true);
-            _timeMan.OnPauseMenuClosed();
+            _pauseMan.OnPauseMenuClosed();
         }
     }
 
