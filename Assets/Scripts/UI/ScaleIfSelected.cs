@@ -23,7 +23,7 @@ public class ScaleIfSelected : MonoBehaviour
         transform.localScale = Vector3.Lerp(
             transform.localScale,
             Vector3.one * target,
-            Time.deltaTime * speed
+            Time.unscaledDeltaTime * speed
         );
     }
 }
