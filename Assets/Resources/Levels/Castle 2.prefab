@@ -98,8 +98,8 @@ MonoBehaviour:
   garlicPrefab: {fileID: 7788208645314128245, guid: 101fc87f3b03c164b802e4ee448c17b3, type: 3}
   garlicClovePrefab: {fileID: 7129683410741800149, guid: 7db8d70c3ee79af46b22d4af7169624c, type: 3}
   cloves: []
-  miny: 0
-  maxy: 0
+  miny: -10
+  maxy: 100
 --- !u!1 &2020789917034888938
 GameObject:
   m_ObjectHideFlags: 0
