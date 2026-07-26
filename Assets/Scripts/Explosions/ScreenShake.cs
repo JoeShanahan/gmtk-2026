@@ -11,7 +11,7 @@ public class ScreenShake : MonoBehaviour
     float shakeAmount = 0.7f;
     float decreaseFactor = 1.0f;
     
-    GameSettings _settings;
+    [SerializeField] GameSettings _settings;
     bool shakeEnabled;
     
     [SerializeField] bool doShake;
@@ -23,12 +23,11 @@ public class ScreenShake : MonoBehaviour
 
     void Update()
     {
-        shakeEnabled = _settings.ScreenShakeModifier;
-        if (doShake && shakeEnabled)
+        if (doShake)
         {
             if (shake > 0)
             {
-                _camera.transform.localPosition = Random.insideUnitSphere * shakeAmount;
+                _camera.transform.localPosition = Random.insideUnitSphere * (shakeAmount * _settings.ScreenShakeModifier);
                 shake -= Time.deltaTime * decreaseFactor;
 
             }

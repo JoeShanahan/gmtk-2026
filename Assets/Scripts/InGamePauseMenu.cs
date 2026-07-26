@@ -42,6 +42,7 @@ public class InGamePauseMenu : MonoBehaviour
             return;
         
         _isActive = !_isActive;
+        _pauseMan ??= FindAnyObjectByType<PauseManager>();
 
         if (_isActive)
         {

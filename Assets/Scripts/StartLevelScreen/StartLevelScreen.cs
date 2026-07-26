@@ -1,5 +1,7 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class StartLevelScreen : MonoBehaviour
 {
@@ -7,6 +9,13 @@ public class StartLevelScreen : MonoBehaviour
     [SerializeField] private LevelTimeListItem _birdieTime;
     [SerializeField] private LevelTimeListItem _parTime;
     [SerializeField] private LevelTimeListItem _myTime;
+    [SerializeField] private Transform _buttonToSelect;
+
+    public void OnEnable()
+    {
+        if (_buttonToSelect != null)
+            EventSystem.current.SetSelectedGameObject(_buttonToSelect.gameObject);
+    }
 
     public void SetLevel(LevelData toLoad)
     {
