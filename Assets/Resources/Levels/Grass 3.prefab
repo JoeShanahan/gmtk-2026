@@ -3836,6 +3836,7 @@ GameObject:
   - component: {fileID: 3223443951232683815}
   - component: {fileID: 4017123855551901629}
   - component: {fileID: 2263676051993585565}
+  - component: {fileID: 4528625321292226975}
   m_Layer: 0
   m_Name: Water (1)
   m_TagString: Untagged
@@ -4171,13 +4172,25 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &4528625321292226975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7410819026197960456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d245b5939565840a5b8743a9466c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnviromentalKillTrigger
 --- !u!1 &7678755037246235585
 GameObject:
   m_ObjectHideFlags: 0
