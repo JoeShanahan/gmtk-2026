@@ -76,6 +76,7 @@ public class AllDirectionExplosion : ExplosionBase
         }
         
         GameObject newObj = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
+        newObj.transform.position += new Vector3(0, 0.5f, 0);
         Destroy(newObj, 8);
     }
 

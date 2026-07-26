@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TeleportableObject : MonoBehaviour
 {
-    private Vector3 _airPosition = new Vector3(0, 100, 0);
+    private Vector3 _airPosition = new Vector3(0, 90, 0);
     
     public void HangInAir(float time, Teleport exit)
     {
