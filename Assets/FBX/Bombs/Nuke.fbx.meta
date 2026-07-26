@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 7b145cd9812f6fb46bb7906139433a82
+guid: 22e2c37bdaa0945b096e3d53b079fe10
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
   externalObjects:
   - first:
-      type: UnityEngine:Texture2D
+      type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Claymore Texture
-    second: {fileID: 2800000, guid: 38dc2cef31c95254b8b6a28b6ff3844b, type: 3}
+      name: Nuke_Mat
+    second: {fileID: 2100000, guid: 85e63edea2bbe40f2b5ace66d7b50f6b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -37,11 +37,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|ClaymoreIdle
-      takeName: Armature|ClaymoreIdle
-      internalID: 3338098084848609823
+      name: Nuke_Rig|Nuke_Rig|Nuke_Anim_Idle
+      takeName: Nuke_Rig|Nuke_Rig|Nuke_Anim_Idle
+      internalID: 78303683395048786
       firstFrame: 0
-      lastFrame: 31
+      lastFrame: 59
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -66,11 +66,40 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|ClayWalk
-      takeName: Armature|ClayWalk
-      internalID: 4974719234927957109
+      name: Nuke_Rig|Nuke_Rig|Nuke_Anim_Idle.001
+      takeName: Nuke_Rig|Nuke_Rig|Nuke_Anim_Idle.001
+      internalID: 5431575501214705529
       firstFrame: 0
-      lastFrame: 32
+      lastFrame: 59
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Nuke_Rig|Nuke_Rig|Nuke_Anim_Walk
+      takeName: Nuke_Rig|Nuke_Rig|Nuke_Anim_Walk
+      internalID: 7084284661283398389
+      firstFrame: 0
+      lastFrame: 59
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

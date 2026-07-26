@@ -17,7 +17,7 @@ public class BombCharacterUI : W2C
     public void Init(BombCharacter character)
     {
         _character = character;
-        SetPosition(_character.transform);
+        SetPosition(_character.transform, Vector3.up);
         UpdateTime(character.RemainingTime);
 
         foreach (Transform t in _activeArrows)
