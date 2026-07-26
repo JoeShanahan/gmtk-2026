@@ -1,66 +1,37 @@
+using System;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] 
-    private Transform _pauseBorder;
+    public bool timerRunning = false;
+    public string formattedTimer;
+    public float timer;
 
-    [SerializeField] 
-    private GameSettings _settings;
-    
-    private InputSystem_Actions _input;
-    private bool _isPaused;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Update()
     {
-        _input = new();
-        _input.Enable();
-        _pauseBorder.gameObject.SetActive(_isPaused);
-    }
-    
-    private void OnDestroy()
-    {
-        _input.Disable();
-    }
-
-    public void OnSwapPerformed()
-    {
-        if (_settings != null && _settings.AutoPauseOnSwap)
+        if (timerRunning)
         {
-            _isPaused = true;
-            Time.timeScale = GetSlowSpeed();
-            _pauseBorder.gameObject.SetActive(true);
+            timer += Time.deltaTime;
+            formattedTimer = timer.ToString("F2");
         }
     }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (_input.GameControl.Pause.WasPressedThisFrame())
-        {
-            TogglePause();
-        }
 
-        // if (_isPaused)
-        //     return;
-        // Time.timeScale = _input.GameControl.FFWD.IsPressed() ? 4 : 1;
+    public void StartTime()
+    {
+        timer = 0;
+        timerRunning = true;                    
+        Time.timeScale = 1;
     }
 
-    private float GetSlowSpeed()
+    public void PauseTime()
     {
-        return _settings == null ? SpeedSettings.DEFAULT : _settings.PauseSpeed;
+        timerRunning = false;
+        Time.timeScale = 0;
     }
 
-    public void OnPauseMenuClosed()
+    public void ResumeTime()
     {
-        Time.timeScale = _isPaused ? GetSlowSpeed() : 1;
-    }
-
-    public void TogglePause()
-    {
-        _isPaused = !_isPaused;
-        Time.timeScale = _isPaused ? GetSlowSpeed() : 1;
-        _pauseBorder.gameObject.SetActive(_isPaused);
+        timerRunning = true;
+        Time.timeScale = 1;
     }
 }

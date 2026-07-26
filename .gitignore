@@ -42,3 +42,4 @@ Thumbs.db
 *.blend1.meta
 /UserSettings
 /.idea
+/build

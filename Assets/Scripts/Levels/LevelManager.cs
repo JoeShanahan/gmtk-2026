@@ -6,7 +6,11 @@ public class LevelManager : MonoBehaviour
 {
     private LevelData _selectedLevel;
     private SpawnedLevel _levelInstance;
-    private float _currentSeconds;
+    
+    private TimeManager _timeManager;
+    private Timer _timer;
+
+    public string currentMedal;
 
     [SerializeField] 
     private DebugLevelSelectList _debugUi;
@@ -23,6 +27,9 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _timeManager = FindAnyObjectByType<TimeManager>();
+        _timer = FindAnyObjectByType<Timer>();
+        
         _input = new();
         _input.Enable();
         if (_mainGameLevels != null && _mainGameLevels.SelectedLevel != null)
@@ -44,7 +51,6 @@ public class LevelManager : MonoBehaviour
         }
         
         _selectedLevel = level;
-        _currentSeconds = 0;
         _levelInstance = Instantiate(level.Prefab).GetComponent<SpawnedLevel>();
         _debugUi?.SetActive(false);
 
@@ -69,6 +75,8 @@ public class LevelManager : MonoBehaviour
         if (_mainGameUi != null)
             _mainGameUi.gameObject.SetActive(true);
         
+        _timeManager.StartTime();
+        
         FindAnyObjectByType<BombManager>()?.SetPause(false);
         _levelInstance.SwapToMainCam();
 
@@ -78,8 +86,6 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _currentSeconds += Time.deltaTime;
-
         if (_input.GameControl.DebugLevelSelect.WasPressedThisFrame())
         {
             _debugUi?.SetActive(!_debugUi.gameObject.activeInHierarchy);
@@ -96,6 +102,28 @@ public class LevelManager : MonoBehaviour
         if (_selectedLevel == null)
             return;
         
+        _timeManager.PauseTime();
+        
         PersistentUI.DoTransition(() => InstantiateLevel(_selectedLevel, false));
+        
+        _timeManager.StartTime();
+    }
+
+    public void EndLevel()
+    {
+        _timeManager.PauseTime();
+        CalculateMedal(Mathf.FloorToInt(_timeManager.timer));
+        SaveManager.Instance.SetLevelInfo(_selectedLevel.name, _timeManager.formattedTimer);
+        //Show UI elements
+    }
+    
+    void CalculateMedal(int timer)
+    {
+        if (_selectedLevel.SecondsPar > timer && _selectedLevel.SecondsBirdie < timer)
+            currentMedal = "Par";
+        else if (_selectedLevel.SecondsBirdie > timer)
+            currentMedal = "Birdie";
+        else if (_selectedLevel.SecondsPar < timer)
+            currentMedal = "Par";
     }
 }
