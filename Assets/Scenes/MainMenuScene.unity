@@ -3023,7 +3023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombSpawner
   _type: 3
-  _isTutorial: 0
+  _isTutorial: 1
   _bombLife: 50
   _respawnTime: 210
   _delay: 140
@@ -6776,7 +6776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombSpawner
   _type: 1
-  _isTutorial: 0
+  _isTutorial: 1
   _bombLife: 50
   _respawnTime: 210
   _delay: 70
@@ -9800,7 +9800,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BombSpawner
   _type: 0
-  _isTutorial: 0
+  _isTutorial: 1
   _bombLife: 50
   _respawnTime: 210
   _delay: 0
