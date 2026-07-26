@@ -105,6 +105,8 @@ public class AllDirectionExplosion : ExplosionBase
         strongRangeRenderer.positionCount = strongRangePoints.Count;
         strongRangeRenderer.SetPositions(strongRangePoints.ToArray());
 
+        weakRangeRenderer.startWidth = 0.05f;
+        weakRangeRenderer.endWidth = 0.05f;
         weakRangeRenderer.positionCount = weakRangePoints.Count;
         weakRangeRenderer.SetPositions(weakRangePoints.ToArray());
     }
