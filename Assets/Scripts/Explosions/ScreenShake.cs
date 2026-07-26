@@ -11,7 +11,7 @@ public class ScreenShake : MonoBehaviour
     float shakeAmount = 0.7f;
     float decreaseFactor = 1.0f;
     
-    GameSettings _settings;
+    [SerializeField] GameSettings _settings;
     bool shakeEnabled;
     
     [SerializeField] bool doShake;
