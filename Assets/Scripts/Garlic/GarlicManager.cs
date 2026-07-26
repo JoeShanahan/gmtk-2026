@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +16,9 @@ public class GarlicManager : MonoBehaviour
     
     // Garlic Prefab
     [SerializeField] GameObject garlicPrefab;
+    [SerializeField] GameObject garlicClovePrefab;
+    
+    [SerializeField] List<GameObject> cloves = new();
     
     private InputSystem_Actions _input;
 
@@ -68,6 +72,18 @@ public class GarlicManager : MonoBehaviour
     public void RespawnGarlic(GameObject existingGarlic)
     {
         Destroy(existingGarlic);
+        SpawnCloves();
         currentGarlic = Instantiate(garlicPrefab, currentSpawner.transform);
+    }
+    
+    public void SpawnCloves()
+    {
+        Transform pos = currentGarlic.transform;
+        // Spawn 8 cloves. Spawning ontop of each other should cause a little explosion of sorts?   
+        for (int i = 0; cloves.Count < 8; i++)
+        {
+            GameObject clove = Instantiate(garlicClovePrefab, pos.position, pos.rotation);
+            cloves.Add(clove);
+        }
     }
 }
