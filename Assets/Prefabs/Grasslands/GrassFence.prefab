@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 8857047744431827647}
   - component: {fileID: 8334376926248568534}
   - component: {fileID: 2263604672759884916}
-  - component: {fileID: 2729287319331805368}
+  - component: {fileID: 4292439304513543158}
   m_Layer: 0
   m_Name: Grassland Fence.001
   m_TagString: Untagged
@@ -123,8 +123,8 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2729287319331805368
-MeshCollider:
+--- !u!65 &4292439304513543158
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -141,7 +141,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3523789461398831612, guid: 02793915e0857734ea5a5d6285e6f3f9, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.3358197, y: 2.4827914, z: 6.6460295}
+  m_Center: {x: 0.00002264232, y: 0.32146734, z: -0.054058325}

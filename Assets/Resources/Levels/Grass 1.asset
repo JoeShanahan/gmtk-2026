@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   LevelName: Grass 1
   Prefab: {fileID: 7143838480130533136, guid: 6f22ae3dee6d56149bf22085668e2388, type: 3}
-  SecondsBirdie: 150
-  SecondsPar: 250
+  SecondsBirdie: 600
+  SecondsPar: 1200
   MainGameIndex: 0
   MyBestTime: 15.06
