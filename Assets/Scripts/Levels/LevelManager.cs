@@ -12,6 +12,8 @@ public enum LevelRank
 
 public class LevelManager : MonoBehaviour
 {
+    public event Action OnLevelComplete;
+    
     private LevelData _selectedLevel;
     private SpawnedLevel _levelInstance;
     
@@ -140,6 +142,8 @@ public class LevelManager : MonoBehaviour
         _levelCompleteScreen.CompleteLevel(levelTime, previousBest, _selectedLevel, currentMedal);
         //Show UI elements
         Debug.Log("Level Complete");
+        
+        OnLevelComplete?.Invoke();
     }
     
     LevelRank CalculateMedal(int timer)
