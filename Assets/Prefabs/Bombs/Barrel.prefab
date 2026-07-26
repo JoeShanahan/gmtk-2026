@@ -202,7 +202,7 @@ MonoBehaviour:
   _gfxObject: {fileID: 6406078350759272388}
   _weakExplosionRange: {fileID: 4200764265445751722}
   _strongExplosionRange: {fileID: 8803892255006717173}
-  _whenToShake: 0.3
+  _whenToShake: 0.1
   _whenToScale: 0.025
   _whenToShowRange: 0.3
   _scaleMultiplier: 2

@@ -137,6 +137,8 @@ public class VerticalExplosion : ExplosionBase
             weakPoints.Add(weakPoints[^32]);
         }
         
+        weakRangeRenderer.startWidth = 0.1f;
+        weakRangeRenderer.endWidth = 0.1f;
         strongRangeRenderer.positionCount = strongPoints.Count;
         strongRangeRenderer.SetPositions(strongPoints.ToArray());
     
