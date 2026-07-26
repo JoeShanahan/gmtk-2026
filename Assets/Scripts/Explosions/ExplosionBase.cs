@@ -71,7 +71,7 @@ public abstract class ExplosionBase : MonoBehaviour
 
         else
         {
-            _screenShake.Shake(2f);
+            _screenShake.Shake(0.2f);
         }
     }
     
