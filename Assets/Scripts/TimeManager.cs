@@ -1,31 +1,37 @@
+using System;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
 {
     public bool timerRunning = false;
     public string formattedTimer;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public float timer;
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-            
+        if (timerRunning)
+        {
+            timer += Time.deltaTime;
+            formattedTimer = timer.ToString("F2");
+        }
     }
 
     public void StartTime()
     {
+        timer = 0;
         timerRunning = true;                    
         Time.timeScale = 1;
     }
 
-    public void StopTime()
+    public void PauseTime()
     {
         timerRunning = false;
         Time.timeScale = 0;
+    }
+
+    public void ResumeTime()
+    {
+        timerRunning = true;
+        Time.timeScale = 1;
     }
 }

@@ -6,6 +6,7 @@ public class Goal : MonoBehaviour
     // Just incase something is wanted from the garlic
     private GarlicManager _garlicManager;
     private TimeManager _timeManager;
+    private LevelManager _levelManager;
     
     private Timer _timerScript;
     
@@ -27,8 +28,6 @@ public class Goal : MonoBehaviour
     private void Win()
     {
         Debug.Log("Won!");
-        // Do other win things here
-        
-        _timeManager.StopTime();
+        _levelManager.EndLevel();
     }
 }
