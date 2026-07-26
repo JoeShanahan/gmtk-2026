@@ -63,7 +63,7 @@ public class AllDirectionExplosion : ExplosionBase
     {
         GenerateAllSnapDirections();
         
-        _screenShake.Shake(2f);
+        _screenShake?.Shake(2f);
         
         foreach (Collider col in Physics.OverlapSphere(position, _powerfulRange + _weakRange))
         {
