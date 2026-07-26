@@ -85,6 +85,68 @@ public class VerticalExplosion : ExplosionBase
         GameObject newObj = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
         Destroy(newObj, 8);
     }
+    
+    public override void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer)
+    { 
+        Vector3 start = transform.position - new Vector3(0, _downwardsRange, 0);
+        Vector3 powerfulEnd = transform.position + (Vector3.up * _powerfulRange);
+        Vector3 weakEnd = powerfulEnd + (Vector3.up * _weakRange);
+
+        List<Vector3> strongPoints = new List<Vector3>();
+        List<Vector3> weakPoints = new List<Vector3>();
+        
+        // make points and positions for the planned circles, creating 4 for powerful
+        Vector3[] strongCirclesPoints = new[]
+        {
+            start,
+            Vector3.Lerp(start, powerfulEnd, 0.33f),
+            Vector3.Lerp(start, powerfulEnd, 0.66f),
+            powerfulEnd
+        };
+        
+        Vector3[] weakCirclesPoints = new[]
+        {
+            Vector3.Lerp(powerfulEnd, weakEnd, 0.33f),
+            Vector3.Lerp(powerfulEnd, weakEnd, 0.66f),
+            weakEnd
+        };
+
+        // Strong Range 
+        foreach (Vector3 mid in strongCirclesPoints)
+        {
+            for (int i = 0; i < 32; i++)
+            {
+                float circA = (Mathf.PI * 2 / 32) * i;
+                Vector3 pointA = new Vector3(Mathf.Cos(circA) * _radius, 0, Mathf.Sin(circA) * _radius);
+                strongPoints.Add(pointA + mid);
+            }
+            
+            strongPoints.Add(strongPoints[^32]);
+        }
+
+        // Weak Range
+        foreach (Vector3 mid in weakCirclesPoints)
+        {
+            for (int i = 0; i < 32; i++)
+            {
+                float circA = (Mathf.PI * 2 / 32) * i;
+                Vector3 pointA = new Vector3(Mathf.Cos(circA) * _radius, 0, Mathf.Sin(circA) * _radius);
+                weakPoints.Add(pointA + mid);
+            }
+
+            weakPoints.Add(weakPoints[^32]);
+        }
+        
+        weakRangeRenderer.startWidth = 0.1f;
+        weakRangeRenderer.endWidth = 0.1f;
+        strongRangeRenderer.positionCount = strongPoints.Count;
+        strongRangeRenderer.SetPositions(strongPoints.ToArray());
+    
+        weakRangeRenderer.startWidth = 0.05f;
+        weakRangeRenderer.endWidth = 0.05f;
+        weakRangeRenderer.positionCount = weakPoints.Count;
+        weakRangeRenderer.SetPositions(weakPoints.ToArray());
+    }
 
     public void OnDrawGizmos()
     {

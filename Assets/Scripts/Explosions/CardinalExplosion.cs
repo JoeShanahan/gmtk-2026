@@ -51,6 +51,11 @@ public class CardinalExplosion : ExplosionBase
 
         return potentialExplosions.ToArray();
     }
+    
+    public override void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer)
+    {
+        Debug.Log("Not implemented");
+    }
 
     public override void Explode(Vector3 position, Vector3 facing)
     {
