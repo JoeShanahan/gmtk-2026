@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 089f3bb49e83b41b6b665ed62cb9cb97, type: 3}
-  m_Name: void-launch-level
+  m_Name: joe-test-level-2
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  LevelName: Yeetus Deletus
+  LevelName: Yeetus Deletus 2
   Prefab: {fileID: 7143838480130533136, guid: a7d859ab8b8824171aba5c98a54f8ff5, type: 3}
-  SecondsBirdie: 150
-  SecondsPar: 250
+  SecondsBirdie: 200
+  SecondsPar: 300
   MainGameIndex: 0
   MyBestTime: 15.06

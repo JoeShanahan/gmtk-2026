@@ -2,6 +2,14 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum LevelRank
+{
+    None = 0,
+    Bogey = 1,
+    Par = 2,
+    Birdie = 3
+}
+
 public class LevelManager : MonoBehaviour
 {
     private LevelData _selectedLevel;
@@ -10,7 +18,7 @@ public class LevelManager : MonoBehaviour
     private TimeManager _timeManager;
     private Timer _timer;
 
-    public string currentMedal;
+    public LevelRank currentMedal;
 
     [SerializeField] 
     private DebugLevelSelectList _debugUi;
@@ -18,10 +26,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField] 
     private MainGameLevelSet _mainGameLevels;
 
+    [SerializeField] private LevelCompleteScreen _levelCompleteScreen;
+    
     [SerializeField] private Transform _mainGameUi;
     [SerializeField] private Transform _startGameUi;
     
     private InputSystem_Actions _input;
+
+    [SerializeField] 
+    private SaveData _secondarySaveData;
     
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -104,26 +117,38 @@ public class LevelManager : MonoBehaviour
         
         _timeManager.PauseTime();
         
-        PersistentUI.DoTransition(() => InstantiateLevel(_selectedLevel, false));
+        PersistentUI.DoTransition(() =>
+        {
+            InstantiateLevel(_selectedLevel, false);
+            FindAnyObjectByType<LevelCompleteScreen>()?.gameObject.SetActive(false);
+        });
         
         _timeManager.StartTime();
     }
 
     public void EndLevel()
     {
+        float levelTime = _timeManager.timer;
+        
         _timeManager.PauseTime();
-        CalculateMedal(Mathf.FloorToInt(_timeManager.timer));
+        currentMedal = CalculateMedal(Mathf.FloorToInt(levelTime * 10));
         SaveManager.Instance.SetLevelInfo(_selectedLevel.name, _timeManager.formattedTimer);
+        
+        float previousBest = _secondarySaveData.GetBestTime(_selectedLevel.MainGameIndex);
+        _secondarySaveData.SetBestTime(_selectedLevel.MainGameIndex, levelTime);
+
+        _levelCompleteScreen.CompleteLevel(levelTime, previousBest, _selectedLevel, currentMedal);
         //Show UI elements
     }
     
-    void CalculateMedal(int timer)
+    LevelRank CalculateMedal(int timer)
     {
-        if (_selectedLevel.SecondsPar > timer && _selectedLevel.SecondsBirdie < timer)
-            currentMedal = "Par";
-        else if (_selectedLevel.SecondsBirdie > timer)
-            currentMedal = "Birdie";
-        else if (_selectedLevel.SecondsPar < timer)
-            currentMedal = "Par";
+        if (timer > _selectedLevel.SecondsPar)
+            return LevelRank.Bogey;
+
+        if (timer > _selectedLevel.SecondsBirdie)
+            return LevelRank.Par;
+
+        return LevelRank.Birdie;
     }
 }

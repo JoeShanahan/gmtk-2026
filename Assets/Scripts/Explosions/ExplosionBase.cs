@@ -41,6 +41,8 @@ public abstract class ExplosionBase : MonoBehaviour
     /// <returns></returns>
     public abstract PotentialExplosionData[] GetPotentialExplosions();
 
+    public abstract void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer);
+
     protected void GenerateAllSnapDirections()
     {
         _allSnapPoints = new List<Vector3>();

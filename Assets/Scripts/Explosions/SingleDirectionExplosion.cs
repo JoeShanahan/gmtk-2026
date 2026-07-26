@@ -105,6 +105,53 @@ public class SingleDirectionExplosion : ExplosionBase
         GameObject newObj = Instantiate(_particlePrefab, transform.position, Quaternion.LookRotation(facing, Vector3.up));
         Destroy(newObj, 8);
     }
+    
+    public override void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer)
+    {
+        if (_movement.Forward != _cachedDirection)
+        {
+            _cachedDirection = _movement.Forward;
+            _snappedForward = GetClosestDirection(_cachedDirection);
+        }
+
+        Vector3 startPos = transform.position + new Vector3(0, 1f, 0) - (_snappedForward * _coneClip);
+
+        Vector3 positive = Quaternion.Euler(0f, _coneAngle * 0.5f, 0f) * _snappedForward;
+        Vector3 negative = Quaternion.Euler(0f, _coneAngle * -0.5f, 0f) * _snappedForward;
+
+        Vector3 pointA = startPos + (positive * _coneClip);
+        Vector3 pointB = startPos + (negative * _coneClip);
+        Vector3 pointC = startPos + (positive * (_powerfulRange + _coneClip));
+        Vector3 pointD = startPos + (negative * (_powerfulRange + _coneClip));
+        Vector3 pointE = startPos + _snappedForward * _coneClip;
+        Vector3 pointF = startPos + _snappedForward * (_powerfulRange + _coneClip);
+
+        Vector3 pointFarA = startPos + (positive * (_coneClip + _powerfulRange + _weakRange));
+        Vector3 pointFarB = startPos + (negative * (_coneClip + _powerfulRange + _weakRange));
+        Vector3 pointFarC = startPos + (_cachedDirection * (_coneClip + _powerfulRange + _weakRange));
+
+        // Strong range 
+        List<Vector3> strongPoints = new List<Vector3>
+        {
+            pointA, pointC, pointF, pointD, pointB, pointE, pointA 
+        };
+
+        strongRangeRenderer.startWidth = 0.075f;
+        strongRangeRenderer.endWidth =  0.075f;
+        strongRangeRenderer.positionCount = strongPoints.Count;
+        strongRangeRenderer.SetPositions(strongPoints.ToArray());
+
+        // Weak range 
+        List<Vector3> weakPoints = new List<Vector3>
+        {
+            pointC, pointFarA, pointFarC, pointFarB, pointD, pointF, pointC  
+        };
+
+        weakRangeRenderer.startWidth = 0.05f;
+        weakRangeRenderer.endWidth = 0.05f;
+        weakRangeRenderer.positionCount = weakPoints.Count;
+        weakRangeRenderer.SetPositions(weakPoints.ToArray());
+    }
 
     private Vector3 _cachedDirection;
     private Vector3 _snappedForward;
