@@ -117,7 +117,11 @@ public class LevelManager : MonoBehaviour
         
         _timeManager.PauseTime();
         
-        PersistentUI.DoTransition(() => InstantiateLevel(_selectedLevel, false));
+        PersistentUI.DoTransition(() =>
+        {
+            InstantiateLevel(_selectedLevel, false);
+            FindAnyObjectByType<LevelCompleteScreen>()?.gameObject.SetActive(false);
+        });
         
         _timeManager.StartTime();
     }

@@ -24,6 +24,9 @@ public class CdPlayer : MonoBehaviour
 
     private void ActuallyInsertDisc(AudioClip clip)
     {
+        if (_source.clip == clip)
+            return;
+        
         if (_source.clip == null)
         {
             _source.volume = _settingsModifier * _maxVolume;
