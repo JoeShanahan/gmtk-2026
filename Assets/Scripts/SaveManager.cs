@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SaveManager : MonoBehaviour
 {
@@ -78,13 +79,13 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SetLevelInfo(int level, float time)
+    public void SetLevelInfo(string level, string time)
     {
-        LevelInfo existingData = saveObject.levelInfos.Find(info => info.level == level);
+        LevelInfo existingData = saveObject.levelInfos.Find(info => info.levelName == level);
 
         if (existingData != null)
         {
-            if (time < existingData.bestTime)
+            if (int.Parse(time) < int.Parse(existingData.bestTime))
             {
                 existingData.bestTime = time;
             }
@@ -92,7 +93,7 @@ public class SaveManager : MonoBehaviour
         else
         {
             LevelInfo newInfo = new LevelInfo();
-            newInfo.level = level;
+            newInfo.levelName = level;
             newInfo.bestTime = time;
             saveObject.levelInfos.Add(newInfo);
         }
@@ -109,6 +110,6 @@ public class SaveObject
 [System.Serializable]
 public class LevelInfo
 {
-    public int level;
-    public float bestTime;
+    public string levelName;
+    public string bestTime;
 }
