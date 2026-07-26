@@ -1,12 +1,30 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public abstract class ExplosionBase : MonoBehaviour
 {
+    public struct PotentialExplosionData
+    {
+        public Rigidbody Target { get; set; }
+        public ExplosionBase Bomb { get; set; }
+        public bool IsWeakRange { get; private set; }
+        public Vector3 ExplosionDirection { get; set; }
+
+        public PotentialExplosionData(Rigidbody target, ExplosionBase bomb, bool isWeakRange, Vector3 direction)
+        {
+            Target = target;
+            Bomb = bomb;
+            IsWeakRange = isWeakRange;
+            ExplosionDirection = direction;
+        }
+    }
+    
     [SerializeField]
     protected CharacterMovement _movement;
     
     protected List<Vector3> _allSnapPoints;
+    protected Rigidbody _myRB;
 
     ScreenShake _screenShake;
 
@@ -15,6 +33,17 @@ public abstract class ExplosionBase : MonoBehaviour
         _screenShake = FindAnyObjectByType<ScreenShake>();
     }
     
+    private void OnEnable()
+    {
+        _myRB = GetComponent<Rigidbody>();
+    }
+
+    /// <summary>
+    /// each Explosion Type has such a different implementation of what's in range that they should implement this themselves
+    /// </summary>
+    /// <returns></returns>
+    public abstract PotentialExplosionData[] GetPotentialExplosions();
+
     protected void GenerateAllSnapDirections()
     {
         _allSnapPoints = new List<Vector3>();
@@ -40,7 +69,7 @@ public abstract class ExplosionBase : MonoBehaviour
     {
         _screenShake.Shake(2f);
     }
-
+    
     protected Vector3 GetClosestDirection(Vector3 originalDirection)
     {
         float bestDot = -1;
