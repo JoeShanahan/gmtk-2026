@@ -24,14 +24,17 @@ public abstract class ExplosionBase : MonoBehaviour
     protected CharacterMovement _movement;
     
     protected List<Vector3> _allSnapPoints;
-
     protected Rigidbody _myRB;
+    
+    private ScreenShake _screenShake;
 
-    private void OnEnable()
+    private void Awake()
     {
+        _screenShake = FindAnyObjectByType<ScreenShake>();
+        
         _myRB = GetComponent<Rigidbody>();
     }
-
+    
     /// <summary>
     /// each Explosion Type has such a different implementation of what's in range that they should implement this themselves
     /// </summary>
@@ -61,7 +64,15 @@ public abstract class ExplosionBase : MonoBehaviour
     
     public virtual void Explode(Vector3 position, Vector3 facing)
     {
-        
+        if (_screenShake == null)
+        {
+            Debug.Log($"No screenshake found by {gameObject.name}!");
+        }
+
+        else
+        {
+            _screenShake.Shake(2f);
+        }
     }
     
     protected Vector3 GetClosestDirection(Vector3 originalDirection)

@@ -16,7 +16,7 @@ public class VerticalExplosion : ExplosionBase
 
     [SerializeField]
     private GameObject _particlePrefab;
-
+    
     public override PotentialExplosionData[] GetPotentialExplosions()
     {
         List<PotentialExplosionData> potentialExplosions = new List<PotentialExplosionData>();
@@ -53,6 +53,8 @@ public class VerticalExplosion : ExplosionBase
 
     public override void Explode(Vector3 position, Vector3 facing)
     {
+        base.Explode(position, facing);
+        
         float totalRange = _downwardsRange + _powerfulRange + _weakRange;
         Vector3 bottom = transform.position - new Vector3(0, _downwardsRange, 0);
         Vector3 top = transform.position + (Vector3.up * (_powerfulRange + _weakRange));

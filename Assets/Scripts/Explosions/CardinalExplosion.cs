@@ -23,7 +23,6 @@ public class CardinalExplosion : ExplosionBase
     [SerializeField]
     private GameObject _particlePrefab;
     
-
     public override PotentialExplosionData[] GetPotentialExplosions()
     {
         GenerateAllSnapDirections();
@@ -55,6 +54,8 @@ public class CardinalExplosion : ExplosionBase
 
     public override void Explode(Vector3 position, Vector3 facing)
     {
+        base.Explode(position, facing);
+        
         GenerateAllSnapDirections();
         
         foreach (Collider col in Physics.OverlapSphere(position, _powerfulRange + _weakRange))

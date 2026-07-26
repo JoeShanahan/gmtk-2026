@@ -23,7 +23,7 @@ public class SingleDirectionExplosion : ExplosionBase
 
     [SerializeField]
     private GameObject _particlePrefab;
-
+    
     private void Start()
     {
         GenerateAllSnapDirections();
@@ -71,6 +71,8 @@ public class SingleDirectionExplosion : ExplosionBase
 
     public override void Explode(Vector3 position, Vector3 facing)
     {
+        base.Explode(position, facing);
+        
         Vector3 startPos = transform.position - (_snappedForward * _coneClip);
         float totalRange = _coneClip + _powerfulRange + _weakRange;
 
