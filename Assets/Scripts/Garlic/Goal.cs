@@ -17,8 +17,6 @@ public class Goal : MonoBehaviour
         _levelManager = FindAnyObjectByType<LevelManager>();
 
         _timerScript = FindAnyObjectByType<Timer>();
-        
-        gameObject.GetComponent<Collider>().isTrigger = false;
     }
 
     private void OnTriggerEnter(Collider other)

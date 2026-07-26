@@ -10941,7 +10941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CdPlayer
   _settings: {fileID: 11400000, guid: 87cc9335b01bb4898870ff0bd62600d8, type: 2}
-  _maxVolume: 0.5
+  _maxVolume: 0.1
   _source: {fileID: 1777419253}
 --- !u!4 &1777419255
 Transform:
