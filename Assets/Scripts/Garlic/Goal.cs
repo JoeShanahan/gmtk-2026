@@ -13,10 +13,10 @@ public class Goal : MonoBehaviour
     private void Start()
     {
         _garlicManager = FindAnyObjectByType<GarlicManager>();
-        
+
+        _levelManager = FindAnyObjectByType<LevelManager>();
+
         _timerScript = FindAnyObjectByType<Timer>();
-        
-        gameObject.GetComponent<Collider>().isTrigger = false;
     }
 
     private void OnTriggerEnter(Collider other)

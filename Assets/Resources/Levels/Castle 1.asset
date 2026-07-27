@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   LevelName: Castle 1
   Prefab: {fileID: 7143838480130533136, guid: 08e93863e8791c84badd8ed949364139, type: 3}
-  SecondsBirdie: 150
-  SecondsPar: 250
-  MainGameIndex: 0
+  SecondsBirdie: 600
+  SecondsPar: 1200
+  MainGameIndex: 6
   MyBestTime: 15.06

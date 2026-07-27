@@ -22,7 +22,7 @@ public class SaveData : ScriptableObject
 
     public void SetBestTime(int levelIndex, float seconds)
     {
-        while (_bestTimes.Capacity <= levelIndex)
+        while (_bestTimes.Count <= levelIndex)
         {
             _bestTimes.Add(0);
         }
