@@ -151,9 +151,9 @@ MonoBehaviour:
   _powerfulRange: 2
   _weakRange: 2
   _powerfulForce: 20
-  _weakForce: 10
+  _weakForce: 15
   _powerfulLift: 0.4
-  _weakLift: 0.1
+  _weakLift: 0.15
   _particlePrefab: {fileID: 2048184250282491274, guid: 901a566295dc24ea499a3bef09e4abd1, type: 3}
 --- !u!114 &6996741292221616612
 MonoBehaviour:

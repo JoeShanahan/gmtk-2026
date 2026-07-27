@@ -9,6 +9,7 @@ public class Goal : MonoBehaviour
     private LevelManager _levelManager;
     
     private Timer _timerScript;
+    private bool _alreadyWon;
     
     private void Start()
     {
@@ -21,8 +22,12 @@ public class Goal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (_alreadyWon)
+            return;
+        
         if (!other.CompareTag("Garlic")) return;
         Win();
+        _alreadyWon = true;
     }
 
     private void Win()
