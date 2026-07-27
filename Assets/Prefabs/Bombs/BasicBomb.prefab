@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4394247282370592188}
   - component: {fileID: 8395293226723813989}
   - component: {fileID: 2220034959689724278}
-  - component: {fileID: 7532447801677776306}
+  - component: {fileID: 731175972817730781}
   - component: {fileID: 6996741292221616612}
   m_Layer: 0
   m_Name: BasicBomb
@@ -135,7 +135,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &7532447801677776306
+--- !u!114 &731175972817730781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,10 +144,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8472144850145563852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faa82d9f58b434d9ba6cf20b59798df9, type: 3}
+  m_Script: {fileID: 11500000, guid: 486aa3080b96b4936863162c8a47cd5b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AllDirectionExplosion
+  m_EditorClassIdentifier: Assembly-CSharp::RoundedDirectionExplosion
   _movement: {fileID: 4394247282370592188}
+  _pieSlices: 16
   _powerfulRange: 2.5
   _weakRange: 2.5
   _powerfulForce: 20

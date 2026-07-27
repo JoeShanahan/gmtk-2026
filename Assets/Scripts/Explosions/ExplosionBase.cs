@@ -43,7 +43,7 @@ public abstract class ExplosionBase : MonoBehaviour
 
     public abstract void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer);
 
-    protected void GenerateAllSnapDirections()
+    protected virtual void GenerateAllSnapDirections()
     {
         _allSnapPoints = new List<Vector3>();
 
@@ -77,7 +77,7 @@ public abstract class ExplosionBase : MonoBehaviour
         }
     }
     
-    protected Vector3 GetClosestDirection(Vector3 originalDirection)
+    protected virtual Vector3 GetClosestDirection(Vector3 originalDirection)
     {
         float bestDot = -1;
         Vector3 best = originalDirection;
