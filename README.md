@@ -10,3 +10,4 @@ Unity Version
 * Implement moving objects
 * Implement teleports
 * Lower the blast strength of normal bombs
+* Checkpoints
