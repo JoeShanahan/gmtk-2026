@@ -148,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AllDirectionExplosion
   _movement: {fileID: 4394247282370592188}
-  _powerfulRange: 2
-  _weakRange: 2
+  _powerfulRange: 2.5
+  _weakRange: 2.5
   _powerfulForce: 20
   _weakForce: 15
   _powerfulLift: 0.4

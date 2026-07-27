@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089f3bb49e83b41b6b665ed62cb9cb97, type: 3}
   m_Name: 02_Grass
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
-  LevelName: Grass 2
+  LevelName: Horseshoe Pond
   Prefab: {fileID: 7143838480130533136, guid: 92d177024a3ee44deb4232345f94c66c, type: 3}
-  SecondsBirdie: 600
-  SecondsPar: 1200
+  SecondsBirdie: 120
+  SecondsPar: 300
   MainGameIndex: 1
   MyBestTime: 15.06
