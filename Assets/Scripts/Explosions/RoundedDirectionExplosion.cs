@@ -71,7 +71,34 @@ public class RoundedDirectionExplosion : ExplosionBase
     
     public override void ShowExplosionRadius(LineRenderer weakRangeRenderer, LineRenderer strongRangeRenderer)
     {
-        Debug.Log("Not implemented");
+        Vector3 yOffset = new Vector3(0, 0.5f, 0);
+
+        List<Vector3> weakRangePoints = new List<Vector3>();
+        List<Vector3> strongRangePoints = new List<Vector3>();
+
+        for (int i = 0; i < 32; i++)
+        {
+            float circA = (Mathf.PI * 2 / 32) * i;
+
+            Vector3 pointA = new Vector3(Mathf.Cos(circA) * _powerfulRange, 0, Mathf.Sin(circA) * _powerfulRange);
+            Vector3 pointA2 = new Vector3(Mathf.Cos(circA) * (_powerfulRange + _weakRange), 0,
+                Mathf.Sin(circA) * (_powerfulRange + _weakRange));
+            
+            strongRangePoints.Add(pointA + transform.position + yOffset);
+            weakRangePoints.Add(pointA2 + transform.position + yOffset);
+        }
+        
+        // close circle by making the last point the same as first point
+        strongRangePoints.Add(strongRangePoints[0]);
+        weakRangePoints.Add(weakRangePoints[0]);
+
+        strongRangeRenderer.positionCount = strongRangePoints.Count;
+        strongRangeRenderer.SetPositions(strongRangePoints.ToArray());
+
+        weakRangeRenderer.startWidth = 0.05f;
+        weakRangeRenderer.endWidth = 0.05f;
+        weakRangeRenderer.positionCount = weakRangePoints.Count;
+        weakRangeRenderer.SetPositions(weakRangePoints.ToArray());
     }
 
     public override void Explode(Vector3 position, Vector3 facing)
