@@ -8,8 +8,8 @@ using UnityEngine.Serialization;
 
 public static class SpeedSettings
 {
-    public static float DEFAULT = 0.05f;
-    public static float SLOW = 0.02f;
+    public static float DEFAULT = 0.1f;
+    public static float SLOW = 0.05f;
     public static float STOPPED = 0.0f;
 }
 

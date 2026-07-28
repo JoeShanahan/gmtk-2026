@@ -57,6 +57,12 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = _isPaused ? GetSlowSpeed() : 1;
     }
 
+    public void OnRestartLevel()
+    {
+        _pauseBorder.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void TogglePause()
     {
         _isPaused = !_isPaused;

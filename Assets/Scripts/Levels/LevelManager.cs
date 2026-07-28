@@ -123,6 +123,7 @@ public class LevelManager : MonoBehaviour
         {
             InstantiateLevel(_selectedLevel, false);
             FindAnyObjectByType<LevelCompleteScreen>()?.gameObject.SetActive(false);
+            FindAnyObjectByType<PauseManager>()?.OnRestartLevel();
         });
         
         _timeManager.StartTime();

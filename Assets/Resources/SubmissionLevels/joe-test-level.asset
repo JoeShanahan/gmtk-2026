@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089f3bb49e83b41b6b665ed62cb9cb97, type: 3}
+  m_Name: joe-test-level
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  LevelName: Yeetus Deletus
+  Prefab: {fileID: 7143838480130533136, guid: a7d859ab8b8824171aba5c98a54f8ff5, type: 3}
+  SecondsBirdie: 150
+  SecondsPar: 250
+  MainGameIndex: 0
+  MyBestTime: 15.06

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 089f3bb49e83b41b6b665ed62cb9cb97, type: 3}
+  m_Name: Forest 2
+  m_EditorClassIdentifier: Assembly-CSharp::LevelData
+  LevelName: Forest 2
+  Prefab: {fileID: 7143838480130533136, guid: 6449503111983f1479d3d56e03c2852c, type: 3}
+  SecondsBirdie: 600
+  SecondsPar: 1200
+  MainGameIndex: 4
+  MyBestTime: 15.06

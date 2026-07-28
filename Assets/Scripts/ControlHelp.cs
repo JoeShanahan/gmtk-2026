@@ -26,7 +26,7 @@ public class ControlHelp : MonoBehaviour
 
     public void ButtonPressMenu()
     {
-        
+        FindAnyObjectByType<InGamePauseMenu>().ToggleMenu();
     }
 
     public void ButtonPressPause()

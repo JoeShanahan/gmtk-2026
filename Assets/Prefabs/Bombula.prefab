@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1290676619109419468}
   - component: {fileID: 5529905723692464590}
+  - component: {fileID: 2969089123511053184}
   m_Layer: 0
   m_Name: Bombula
   m_TagString: Untagged
@@ -46,6 +47,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bombula
   _animator: {fileID: 8147055031983233831}
+--- !u!136 &2969089123511053184
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5890369512921641836}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Height: 6
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.45, z: 0.92}
 --- !u!1001 &7691295202104299920
 PrefabInstance:
   m_ObjectHideFlags: 0
